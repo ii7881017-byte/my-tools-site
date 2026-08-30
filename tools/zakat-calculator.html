@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zakat Calculator | حاسبة الزكاة</title>
+    <meta name="description" content="Calculate your Zakat easily and accurately.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh; line-height: 1.7; color: white;
+            display: flex; justify-content: center; align-items: center; padding: 20px;
+        }
+        .container { width: 100%; max-width: 550px; }
+        .glass-header { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+        .glass-header .icon { font-size: 3em; margin-bottom: 10px; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+        .glass-header h1 { font-size: 1.8em; margin-bottom: 5px; }
+        .tool-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); margin-bottom: 25px; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; text-align: center; }
+        input { width: 100%; padding: 15px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.2em; background: rgba(255,255,255,0.9); color: #333; text-align: center; direction: ltr; margin-bottom: 15px; }
+        button { width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; }
+        button:hover { transform: translateY(-2px); }
+        .result { background: rgba(255,255,255,0.95); color: #333; border-radius: 12px; padding: 25px; margin-top: 20px; text-align: center; display: none; animation: fadeIn 0.5s; }
+        .result.show { display: block; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+        .result p { font-size: 1.3em; font-weight: bold; color: #667eea; white-space: pre-line; }
+        .info-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); text-align: center; }
+        .info-card h3 { margin-bottom: 15px; }
+        .info-card p { opacity: 0.95; font-size: 0.95em; text-align: justify; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: white; text-decoration: none; font-weight: bold; padding: 10px 20px; background: rgba(255,255,255,0.2); border-radius: 50px; }
+        .footer-text { text-align: center; margin-top: 20px; opacity: 0.8; font-size: 0.9em; }
+        .footer-text a { color: white; text-decoration: none; margin: 0 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" data-i18n="back">← Back to Home</a>
+        <header class="glass-header">
+            <div class="icon">💰</div>
+            <h1 data-i18n="title">Zakat Calculator</h1>
+            <p data-i18n="subtitle">Calculate your Zakat easily</p>
+        </header>
+        <div class="tool-card">
+            <label data-i18n="amount">Amount (your money):</label>
+            <input type="text" id="amount" placeholder="10000" maxlength="12">
+            <button onclick="calculateZakat()" data-i18n="btn">✨ Calculate Zakat</button>
+            <div class="result" id="result"><p id="zakatResult"></p></div>
+        </div>
+        <div class="info-card">
+            <h3 data-i18n="aboutTitle">About Zakat Calculator</h3>
+            <p data-i18n="aboutText">Zakat is 2.5% of your wealth that has reached the minimum amount (Nisab).</p>
+        </div>
+        <div class="footer-text">
+            <p data-i18n="footer">© 2026 My Digital Tools</p>
+            <p><a href="../privacy-policy.html" data-i18n="privacy">Privacy</a> | <a href="../contact.html" data-i18n="contact">Contact</a></p>
+        </div>
+    </div>
+    <script>
+        var translations = {
+            en: { back:'← Back to Home', title:'Zakat Calculator', subtitle:'Calculate your Zakat', amount:'Amount (your money):', btn:'✨ Calculate Zakat', aboutTitle:'About Zakat Calculator', aboutText:'Zakat is 2.5% of your wealth that has reached the minimum amount (Nisab).', yourAmount:'Your Amount:', zakatAmount:'Zakat Due (2.5%):', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter a valid amount' },
+            ar: { back:'← العودة للرئيسية', title:'حاسبة الزكاة', subtitle:'احسب زكاتك بسهولة', amount:'المبلغ (أموالك):', btn:'✨ احسب الزكاة', aboutTitle:'عن حاسبة الزكاة', aboutText:'الزكاة هي 2.5% من أموالك التي بلغت النصاب.', yourAmount:'المبلغ:', zakatAmount:'الزكاة المستحقة (2.5%):', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال مبلغ صحيح' },
+            fr: { back:'← Retour', title:'Calculateur Zakat', subtitle:'Calculez votre Zakat', amount:'Montant (votre argent):', btn:'✨ Calculer Zakat', aboutTitle:'À propos', aboutText:'La Zakat est de 2,5% de votre richesse qui a atteint le seuil minimum (Nisab).', yourAmount:'Votre montant:', zakatAmount:'Zakat due (2,5%):', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez un montant valide' },
+            tr: { back:'← Geri', title:'Zekat Hesaplama', subtitle:'Zekatınızı hesaplayın', amount:'Tutar (paranız):', btn:'✨ Zekat Hesapla', aboutTitle:'Hakkında', aboutText:'Zekat, asgari miktara (Nisap) ulaşan servetinizin %2,5\'idir.', yourAmount:'Tutarınız:', zakatAmount:'Zekat (%2,5):', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli bir tutar girin' }
+        };
+        var currentLang = localStorage.getItem('lang') || 'en';
+        function applyLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(function(el) {
+                var key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
+            });
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+        }
+        function calculateZakat() {
+            var input = document.getElementById('amount').value.trim();
+            var arabic = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+            for (var i = 0; i < 10; i++) input = input.replace(new RegExp(arabic[i], 'g'), i);
+            var amount = parseFloat(input);
+            if (isNaN(amount) || amount < 0) { alert(translations[currentLang].error); return; }
+            var zakat = amount * 0.025;
+            var text = translations[currentLang].yourAmount + ' ' + amount + '\n\n' + translations[currentLang].zakatAmount + ' ' + zakat.toFixed(2);
+            document.getElementById('zakatResult').innerText = text;
+            document.getElementById('result').classList.add('show');
+        }
+        applyLang(currentLang);
+    </script>
+</body>
+</html>

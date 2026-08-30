@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter | محول العملات</title>
+    <meta name="description" content="Convert currencies with live exchange rates. Free online currency converter.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh; line-height: 1.7; color: white;
+            display: flex; justify-content: center; align-items: center; padding: 20px;
+        }
+        .container { width: 100%; max-width: 550px; }
+        .glass-header { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+        .glass-header .icon { font-size: 3em; margin-bottom: 10px; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+        .glass-header h1 { font-size: 1.8em; margin-bottom: 5px; }
+        .tool-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); margin-bottom: 25px; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; text-align: center; font-size: 1em; }
+        input, select { 
+            width: 100%; 
+            padding: 15px; 
+            border: 2px solid rgba(255,255,255,0.4); 
+            border-radius: 12px; 
+            font-size: 1.1em; 
+            background: rgba(255,255,255,0.15); 
+            color: white; 
+            text-align: center; 
+            direction: ltr; 
+            margin-bottom: 15px;
+        }
+        input:focus, select:focus { outline: none; border-color: white; box-shadow: 0 0 20px rgba(255,255,255,0.4); }
+        input::placeholder { color: rgba(255,255,255,0.7); }
+        select option {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+        button { width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .result { background: rgba(255,255,255,0.95); color: #333; border-radius: 12px; padding: 25px; margin-top: 20px; text-align: center; display: none; animation: fadeIn 0.5s; }
+        .result.show { display: block; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+        .result p { font-size: 1.4em; font-weight: bold; color: #667eea; white-space: pre-line; }
+        .loading { text-align: center; margin: 10px 0; font-weight: bold; color: #fbbf24; display: none; }
+        .loading.show { display: block; }
+        .info-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); text-align: center; }
+        .info-card h3 { margin-bottom: 15px; }
+        .info-card p { opacity: 0.95; font-size: 0.95em; text-align: justify; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: white; text-decoration: none; font-weight: bold; padding: 10px 20px; background: rgba(255,255,255,0.2); border-radius: 50px; }
+        .footer-text { text-align: center; margin-top: 20px; opacity: 0.8; font-size: 0.9em; }
+        .footer-text a { color: white; text-decoration: none; margin: 0 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" data-i18n="back">← Back to Home</a>
+        <header class="glass-header">
+            <div class="icon">💱</div>
+            <h1 data-i18n="title">Currency Converter</h1>
+            <p data-i18n="subtitle">Live exchange rates</p>
+        </header>
+        <div class="tool-card">
+            <label data-i18n="amount">Amount:</label>
+            <input type="text" id="amount" placeholder="100" maxlength="10">
+            <label data-i18n="from">From:</label>
+            <select id="fromCurrency">
+                <option value="USD">USD - US Dollar</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="IQD">IQD - Iraqi Dinar</option>
+                <option value="TRY">TRY - Turkish Lira</option>
+                <option value="EGP">EGP - Egyptian Pound</option>
+                <option value="SAR">SAR - Saudi Riyal</option>
+                <option value="AED">AED - UAE Dirham</option>
+                <option value="JOD">JOD - Jordanian Dinar</option>
+                <option value="GBP">GBP - British Pound</option>
+                <option value="KWD">KWD - Kuwaiti Dinar</option>
+            </select>
+            <label data-i18n="to">To:</label>
+            <select id="toCurrency">
+                <option value="IQD">IQD - Iraqi Dinar</option>
+                <option value="USD">USD - US Dollar</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="TRY">TRY - Turkish Lira</option>
+                <option value="EGP">EGP - Egyptian Pound</option>
+                <option value="SAR">SAR - Saudi Riyal</option>
+                <option value="AED">AED - UAE Dirham</option>
+                <option value="JOD">JOD - Jordanian Dinar</option>
+                <option value="GBP">GBP - British Pound</option>
+                <option value="KWD">KWD - Kuwaiti Dinar</option>
+            </select>
+            <button onclick="convertCurrency()" data-i18n="btn">✨ Convert</button>
+            <div class="loading" id="loading" data-i18n="loading">⏳ Loading live rates...</div>
+            <div class="result" id="result"><p id="currencyResult"></p></div>
+        </div>
+        <div class="info-card">
+            <h3 data-i18n="aboutTitle">About Currency Converter</h3>
+            <p data-i18n="aboutText">Free currency converter with live exchange rates updated daily. Supports major world currencies.</p>
+        </div>
+        <div class="footer-text">
+            <p data-i18n="footer">© 2026 My Digital Tools</p>
+            <p><a href="../privacy-policy.html" data-i18n="privacy">Privacy</a> | <a href="../contact.html" data-i18n="contact">Contact</a></p>
+        </div>
+    </div>
+    <script>
+        var translations = {
+            en: { back:'← Back to Home', title:'Currency Converter', subtitle:'Live exchange rates', amount:'Amount:', from:'From:', to:'To:', btn:'✨ Convert', loading:'⏳ Loading live rates...', aboutTitle:'About Currency Converter', aboutText:'Free currency converter with live exchange rates updated daily.', result:'💱 Result:', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter a valid amount' },
+            ar: { back:'← العودة للرئيسية', title:'محول العملات', subtitle:'أسعار صرف حية', amount:'المبلغ:', from:'من:', to:'إلى:', btn:'✨ حول', loading:'⏳ جاري تحميل الأسعار...', aboutTitle:'عن محول العملات', aboutText:'محول عملات مجاني بأسعار صرف حية محدثة يومياً.', result:'💱 النتيجة:', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال مبلغ صحيح' },
+            fr: { back:'← Retour', title:'Convertisseur devise', subtitle:'Taux en direct', amount:'Montant:', from:'De:', to:'À:', btn:'✨ Convertir', loading:'⏳ Chargement...', aboutTitle:'À propos', aboutText:'Convertisseur de devises gratuit avec taux en direct.', result:'💱 Résultat:', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez un montant valide' },
+            tr: { back:'← Geri', title:'Döviz Çevirici', subtitle:'Canlı kurlar', amount:'Tutar:', from:'Kimden:', to:'Kime:', btn:'✨ Çevir', loading:'⏳ Yükleniyor...', aboutTitle:'Hakkında', aboutText:'Günlük güncellenen canlı döviz kurlarıyla ücretsiz döviz çevirici.', result:'💱 Sonuç:', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli tutar girin' }
+        };
+        var currentLang = localStorage.getItem('lang') || 'en';
+        function applyLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(function(el) {
+                var key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
+            });
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+        }
+        function convertCurrency() {
+            var input = document.getElementById('amount').value.trim();
+            var arabic = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+            for (var i = 0; i < 10; i++) input = input.replace(new RegExp(arabic[i], 'g'), i);
+            var amount = parseFloat(input);
+            if (isNaN(amount) || amount <= 0) { alert(translations[currentLang].error); return; }
+            var from = document.getElementById('fromCurrency').value;
+            var to = document.getElementById('toCurrency').value;
+            document.getElementById('loading').classList.add('show');
+            document.getElementById('result').classList.remove('show');
+            fetch('https://open.er-api.com/v6/latest/' + from)
+                .then(function(response) { return response.json(); })
+                .then(function(data) {
+                    document.getElementById('loading').classList.remove('show');
+                    var rate = data.rates[to];
+                    var result = amount * rate;
+                    var text = translations[currentLang].result + '\n\n' + amount + ' ' + from + ' =\n' + result.toFixed(2) + ' ' + to + '\n\n' + '1 ' + from + ' = ' + rate.toFixed(4) + ' ' + to;
+                    document.getElementById('currencyResult').innerText = text;
+                    document.getElementById('result').classList.add('show');
+                })
+                .catch(function() {
+                    document.getElementById('loading').classList.remove('show');
+                    alert('⚠️ Error loading rates. Please try again.');
+                });
+        }
+        applyLang(currentLang);
+    </script>
+</body>
+</html>

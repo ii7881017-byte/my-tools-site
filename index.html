@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Digital Tools | Free Online Tools 2026</title>
+    <meta name="description" content="Free online digital tools: 15+ tools including age calculator, BMI, calorie calculator, currency converter, GPA and more.">
+    <style>
+        :root {
+            --bg1: #667eea;
+            --bg2: #764ba2;
+            --bg3: #f093fb;
+            --glass: rgba(255,255,255,0.15);
+            --border: rgba(255,255,255,0.3);
+            --text: white;
+            --card-bg: rgba(255,255,255,0.2);
+            --dropdown-bg: rgba(255,255,255,0.1);
+        }
+        .dark-mode {
+            --bg1: #1e1e2e;
+            --bg2: #2d2d44;
+            --bg3: #1a1a2e;
+            --glass: rgba(0,0,0,0.4);
+            --border: rgba(255,255,255,0.1);
+            --text: #e0e0e0;
+            --card-bg: rgba(0,0,0,0.5);
+            --dropdown-bg: rgba(0,0,0,0.7);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 50%, var(--bg3) 100%);
+            min-height: 100vh;
+            line-height: 1.7;
+            color: var(--text);
+            background-attachment: fixed;
+            transition: all 0.5s;
+        }
+        .container { width: 90%; max-width: 1000px; margin: 0 auto; }
+        
+        /* الهيدر */
+        .glass-header {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .glass-header h1 { font-size: 2.2em; margin-bottom: 5px; }
+        
+        /* الشريط العلوي */
+        .top-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        /* القوائم المنسدلة */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-btn {
+            padding: 10px 20px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            color: var(--text);
+            font-size: 0.95em;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            min-width: 120px;
+        }
+        .dropdown-btn:hover { background: rgba(255,255,255,0.3); }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: var(--dropdown-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            min-width: 160px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            z-index: 100;
+            padding: 8px;
+        }
+        .dropdown-content.show { display: block; }
+        .dropdown-item {
+            display: block;
+            width: 100%;
+            padding: 10px 15px;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            text-align: center;
+            font-size: 0.9em;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+        .dropdown-item:hover { background: rgba(255,255,255,0.2); }
+        .dropdown-item.active { background: rgba(255,255,255,0.3); font-weight: bold; }
+        
+        /* البحث */
+        .search-box { text-align: center; margin: 20px 0; }
+        .search-box input {
+            width: 80%;
+            max-width: 400px;
+            padding: 12px 20px;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            font-size: 1em;
+            background: var(--glass);
+            color: var(--text);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .search-box input::placeholder { color: rgba(255,255,255,0.6); }
+        .search-box input:focus { outline: none; border-color: white; }
+        
+        /* البطاقات */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            padding: 30px;
+            text-align: center;
+            color: var(--text);
+            transition: all 0.3s;
+        }
+        .glass-card:hover { transform: translateY(-5px); }
+        .hero { margin-bottom: 40px; padding: 40px; }
+        .hero h2 { font-size: 1.8em; margin-bottom: 10px; }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            padding-bottom: 30px;
+        }
+        .tool-card h3 { margin-bottom: 10px; font-size: 1.3em; }
+        .tool-card p { font-size: 0.95em; opacity: 0.9; margin-bottom: 20px; }
+        .glass-btn {
+            display: inline-block;
+            background: rgba(255,255,255,0.3);
+            color: var(--text);
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        .glass-btn:hover { background: rgba(255,255,255,0.5); }
+        
+        /* الفوتر */
+        .glass-footer {
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
+            color: var(--text);
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 40px;
+        }
+        .glass-footer a { color: var(--text); text-decoration: none; margin: 0 5px; }
+    </style>
+</head>
+<body>
+
+    <header class="glass-header">
+        <div class="container">
+            <h1 data-i18n="siteName">🛠️ My Digital Tools</h1>
+            <p data-i18n="siteDesc">Free and fast tools for daily use</p>
+        </div>
+    </header>
+
+    <div class="top-bar">
+        <!-- زر اللغات -->
+        <div class="dropdown">
+            <button class="dropdown-btn" onclick="toggleDropdown('langDropdown')">🌍 <span data-i18n="langBtn">Language</span> ▾</button>
+            <div class="dropdown-content" id="langDropdown">
+                <button class="dropdown-item" onclick="setLang('en'); closeDropdown('langDropdown')" id="lang-en">English</button>
+                <button class="dropdown-item" onclick="setLang('ar'); closeDropdown('langDropdown')" id="lang-ar">العربية</button>
+                <button class="dropdown-item" onclick="setLang('fr'); closeDropdown('langDropdown')" id="lang-fr">Français</button>
+                <button class="dropdown-item" onclick="setLang('tr'); closeDropdown('langDropdown')" id="lang-tr">Türkçe</button>
+            </div>
+        </div>
+
+        <!-- زر الوضع -->
+        <div class="dropdown">
+            <button class="dropdown-btn" onclick="toggleDropdown('modeDropdown')">🎨 <span data-i18n="modeBtn">Mode</span> ▾</button>
+            <div class="dropdown-content" id="modeDropdown">
+                <button class="dropdown-item" onclick="setMode('auto'); closeDropdown('modeDropdown')" id="mode-auto-item">🌓 <span data-i18n="auto">Auto</span></button>
+                <button class="dropdown-item" onclick="setMode('light'); closeDropdown('modeDropdown')" id="mode-light-item">☀️ <span data-i18n="light">Light</span></button>
+                <button class="dropdown-item" onclick="setMode('dark'); closeDropdown('modeDropdown')" id="mode-dark-item">🌙 <span data-i18n="dark">Dark</span></button>
+            </div>
+        </div>
+
+        <!-- زر المشاركة -->
+        <div class="dropdown">
+            <button class="dropdown-btn" onclick="toggleDropdown('shareDropdown')">📤 <span data-i18n="shareBtn">Share</span> ▾</button>
+            <div class="dropdown-content" id="shareDropdown">
+                <button class="dropdown-item" onclick="share('facebook'); closeDropdown('shareDropdown')">📘 <span data-i18n="shareFb">Facebook</span></button>
+                <button class="dropdown-item" onclick="share('twitter'); closeDropdown('shareDropdown')">🐦 <span data-i18n="shareTw">Twitter</span></button>
+                <button class="dropdown-item" onclick="share('whatsapp'); closeDropdown('shareDropdown')">📱 <span data-i18n="shareWa">WhatsApp</span></button>
+                <button class="dropdown-item" onclick="share('copy'); closeDropdown('shareDropdown')">🔗 <span data-i18n="shareCopy">Copy Link</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="🔍 Search tools..." oninput="searchTools()">
+    </div>
+
+    <main class="container">
+        <section class="hero glass-card">
+            <h2 data-i18n="welcome">Welcome to Digital Tools</h2>
+            <p data-i18n="heroText">Choose the tool you need. All tools are free and work directly in your browser.</p>
+        </section>
+
+        <section class="tools-grid" id="toolsGrid">
+            <article class="tool-card glass-card" data-search="age عمر yaş"><h3>🎂 <span data-i18n="tool1">Age Calculator</span></h3><p data-i18n="tool1Desc">Calculate age.</p><a href="tools/age-calculator.html" class="glass-btn" data-i18n="useBtn">Use Tool</a></article>
+            <article class="tool-card glass-card" data-search="bmi weight وزن"><h3>⚖️ <span data-i18n="tool2">BMI Calculator</span></h3><p data-i18n="tool2Desc">Ideal weight.</p><a href="tools/bmi-calculator.html" class="glass-btn" data-i18n="useBtn">Use Tool</a></article>
+            <article class="tool-card glass-card" data-search="word kelime كلمات"><h3>📝 <span data-i18n="tool3">Word Counter</span></h3><p data-i18n="tool3Desc">Count words.</p><a href="tools/word-counter.html" class="glass-btn" data-i18n="useBtn">Use Tool</a></article>
+            <article class="tool-card glass-card" data-search="temperature sıcaklık حرارة"><h3>🌡️ <span data-i18n="tool4">Temperature</span></h3><p data-i18n="tool4Desc">Convert temp.</p><a href="tools/temperature-converter.html" class="glass-btn" data-i18n="useBtn">Use Tool</a></article>
+            <article class="tool-card glass-card" data-search="password şifre مرور"><h3>🔐 <span data-i18n="tool5">Password Generator</span></h3><p data-i18n="tool5Desc">Strong passwords.</p><a href="tools/password-generator.html" class="glass-btn" data-i18n="useBtn">Use Tool</a></article>
+            <article class="tool-card glass-card" data-search="discount indirim خصم"><h3>🛍️ <span data-i18n="tool6">Discount</span></h3><p data-i18n="tool6Desc">Calculate discounts.</p><a href="tools/discount-calculator.html" class="glass-btn" data-i18n="useBtn">Use Tool</a></article>
+            <article class="tool-card glass-card" data-search="date tarih تاريخ"><h3>📅 <span data-i18n="tool7">Date Difference</span></h3><p data-i18n="tool7Desc">Between dates.</p><a href="tools/date-difference.html" class="glass-btn" data-i18n="useBtn">Use Tool</a></article>
+            <article class="tool-card glass-card" data-search="timer sayaç مؤقت"><h3>⏱️ <span data-i18n="tool8">Timer</span></h3><p data-i18n="tool8Desc">Countdown.</p><a href="tools/countdown-timer.html" class="glass-btn" data-i18n="useBtn">Use Tool</a></article>
+            <article class="tool-card glass-card" data-search="number sayı رقم"><h3>🔢 <span data-i18n="tool9">Number to Words</span></h3><p data-i18n="tool9Desc">Convert numbers.</p><a href="tools/number-to-words.html" class="glass-btn" data-i18n="useBtn">Use Tool</a></article>
+            <article class="tool-card glass-card" data-search="zakat زكاة"><h3>💰 <span data-i18n="tool10">Zakat</span></h3><p data-i18n="tool10Desc">Calculate Zakat.</p><a href="tools/zakat-calculator.html" class="glass-btn" data-i18n="useBtn">Use Tool</a></article>
+            <article class="tool-card glass-card" data-search="pregnancy hamilelik حمل"><h3>🤰 <span data-i18n="tool11">Pregnancy</span></h3><p data-i18n="tool11Desc">Due date.</p><a href="tools/pregnancy-calculator.html" class="glass-btn" data-i18n="useBtn">Use Tool</a></article>
+            <article class="tool-card glass-card" data-search="calorie kalori سعرات"><h3>🔥 <span data-i18n="tool12">Calorie</span></h3><p data-i18n="tool12Desc">Daily calories.</p><a href="tools/calorie-calculator.html" class="glass-btn" data-i18n="useBtn">Use Tool</a></article>
+            <article class="tool-card glass-card" data-search="currency döviz عملات"><h3>💱 <span data-i18n="tool13">Currency</span></h3><p data-i18n="tool13Desc">Live rates.</p><a href="tools/currency-converter.html" class="glass-btn" data-i18n="useBtn">Use Tool</a></article>
+            <article class="tool-card glass-card" data-search="percent yüzde نسبة"><h3>💯 <span data-i18n="tool14">Percentage</span></h3><p data-i18n="tool14Desc">Percentages.</p><a href="tools/percentage-calculator.html" class="glass-btn" data-i18n="useBtn">Use Tool</a></article>
+            <article class="tool-card glass-card" data-search="gpa معدل"><h3>🎓 <span data-i18n="tool15">GPA</span></h3><p data-i18n="tool15Desc">University GPA.</p><a href="tools/gpa-calculator.html" class="glass-btn" data-i18n="useBtn">Use Tool</a></article>
+        </section>
+    </main>
+
+    <footer class="glass-footer">
+        <div class="container">
+            <p data-i18n="footerText">© 2026 My Digital Tools</p>
+            <p><a href="about.html" data-i18n="aboutLink">About</a> | <a href="contact.html" data-i18n="contactLink">Contact</a> | <a href="privacy-policy.html" data-i18n="privacyLink">Privacy</a></p>
+        </div>
+    </footer>
+
+    <script>
+        var translations = {
+            ar: { siteName:'🛠️ أدواتي الرقمية', siteDesc:'أدوات مجانية وسريعة', welcome:'أهلاً بك', heroText:'اختر أداتك. كلها مجانية.', tool1:'حاسبة العمر', tool1Desc:'احسب عمرك.', tool2:'حاسبة BMI', tool2Desc:'وزنك المثالي.', tool3:'عداد الكلمات', tool3Desc:'عد الكلمات.', tool4:'محول الحرارة', tool4Desc:'حول الحرارة.', tool5:'مولد كلمات المرور', tool5Desc:'كلمات قوية.', tool6:'حاسبة الخصم', tool6Desc:'احسب الخصم.', tool7:'حساب المدة', tool7Desc:'بين تاريخين.', tool8:'مؤقت', tool8Desc:'عد تنازلي.', tool9:'تحويل الأرقام', tool9Desc:'أرقام لكلمات.', tool10:'الزكاة', tool10Desc:'احسب زكاتك.', tool11:'الحمل', tool11Desc:'موعد الولادة.', tool12:'السعرات', tool12Desc:'سعراتك.', tool13:'العملات', tool13Desc:'أسعار حية.', tool14:'النسبة', tool14Desc:'نسب مئوية.', tool15:'GPA', tool15Desc:'معدلك.', useBtn:'استخدم', footerText:'© 2026 أدواتي', aboutLink:'من نحن', contactLink:'اتصل', privacyLink:'خصوصية', langBtn:'اللغة', modeBtn:'الوضع', shareBtn:'مشاركة', auto:'تلقائي', light:'نهاري', dark:'ليلي', shareFb:'فيسبوك', shareTw:'تويتر', shareWa:'واتساب', shareCopy:'نسخ الرابط' },
+            en: { siteName:'🛠️ My Digital Tools', siteDesc:'Free and fast tools', welcome:'Welcome', heroText:'Choose your tool. All free.', tool1:'Age Calculator', tool1Desc:'Calculate age.', tool2:'BMI Calculator', tool2Desc:'Ideal weight.', tool3:'Word Counter', tool3Desc:'Count words.', tool4:'Temperature', tool4Desc:'Convert temp.', tool5:'Password Generator', tool5Desc:'Strong passwords.', tool6:'Discount', tool6Desc:'Calculate discounts.', tool7:'Date Difference', tool7Desc:'Between dates.', tool8:'Timer', tool8Desc:'Countdown.', tool9:'Number to Words', tool9Desc:'Convert numbers.', tool10:'Zakat', tool10Desc:'Calculate Zakat.', tool11:'Pregnancy', tool11Desc:'Due date.', tool12:'Calorie', tool12Desc:'Daily calories.', tool13:'Currency', tool13Desc:'Live rates.', tool14:'Percentage', tool14Desc:'Percentages.', tool15:'GPA', tool15Desc:'University GPA.', useBtn:'Use Tool', footerText:'© 2026 My Digital Tools', aboutLink:'About', contactLink:'Contact', privacyLink:'Privacy', langBtn:'Language', modeBtn:'Mode', shareBtn:'Share', auto:'Auto', light:'Light', dark:'Dark', shareFb:'Facebook', shareTw:'Twitter', shareWa:'WhatsApp', shareCopy:'Copy Link' },
+            fr: { siteName:'🛠️ Mes Outils', siteDesc:'Gratuit et rapide', welcome:'Bienvenue', heroText:'Choisissez votre outil.', tool1:'Âge', tool1Desc:'Calculez.', tool2:'IMC', tool2Desc:'Poids idéal.', tool3:'Mots', tool3Desc:'Comptez.', tool4:'Température', tool4Desc:'Convertissez.', tool5:'Mot de passe', tool5Desc:'Sécurisé.', tool6:'Réduction', tool6Desc:'Calculez.', tool7:'Dates', tool7Desc:'Différence.', tool8:'Minuterie', tool8Desc:'Rebours.', tool9:'Nombres', tool9Desc:'En mots.', tool10:'Zakat', tool10Desc:'Calculez.', tool11:'Grossesse', tool11Desc:'Date.', tool12:'Calories', tool12Desc:'Besoin.', tool13:'Devise', tool13Desc:'Taux.', tool14:'Pourcentage', tool14Desc:'Calculez.', tool15:'GPA', tool15Desc:'Moyenne.', useBtn:'Utiliser', footerText:'© 2026 Mes Outils', aboutLink:'À propos', contactLink:'Contact', privacyLink:'Confidentialité', langBtn:'Langue', modeBtn:'Mode', shareBtn:'Partager', auto:'Auto', light:'Jour', dark:'Nuit', shareFb:'Facebook', shareTw:'Twitter', shareWa:'WhatsApp', shareCopy:'Copier' },
+            tr: { siteName:'🛠️ Dijital Araçlar', siteDesc:'Ücretsiz araçlar', welcome:'Hoş Geldiniz', heroText:'Aracınızı seçin.', tool1:'Yaş', tool1Desc:'Hesapla.', tool2:'BMI', tool2Desc:'İdeal kilo.', tool3:'Kelime', tool3Desc:'Say.', tool4:'Sıcaklık', tool4Desc:'Çevir.', tool5:'Şifre', tool5Desc:'Güçlü.', tool6:'İndirim', tool6Desc:'Hesapla.', tool7:'Tarih', tool7Desc:'Fark.', tool8:'Sayaç', tool8Desc:'Geri sayım.', tool9:'Sayılar', tool9Desc:'Yazıya.', tool10:'Zekat', tool10Desc:'Hesapla.', tool11:'Hamilelik', tool11Desc:'Doğum.', tool12:'Kalori', tool12Desc:'Günlük.', tool13:'Döviz', tool13Desc:'Canlı.', tool14:'Yüzde', tool14Desc:'Hesapla.', tool15:'GPA', tool15Desc:'Ortalama.', useBtn:'Kullan', footerText:'© 2026 Dijital', aboutLink:'Hakkında', contactLink:'İletişim', privacyLink:'Gizlilik', langBtn:'Dil', modeBtn:'Mod', shareBtn:'Paylaş', auto:'Oto', light:'Gündüz', dark:'Gece', shareFb:'Facebook', shareTw:'Twitter', shareWa:'WhatsApp', shareCopy:'Kopyala' }
+        };
+
+        function toggleDropdown(id) {
+            var dropdown = document.getElementById(id);
+            var allDropdowns = document.querySelectorAll('.dropdown-content');
+            allDropdowns.forEach(function(d) { if (d.id !== id) d.classList.remove('show'); });
+            dropdown.classList.toggle('show');
+        }
+        function closeDropdown(id) {
+            document.getElementById(id).classList.remove('show');
+        }
+
+        function setLang(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(function(el) {
+                var key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) el.textContent = translations[lang][key];
+            });
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.dropdown-item').forEach(function(btn) { btn.classList.remove('active'); });
+            document.getElementById('lang-' + lang).classList.add('active');
+            localStorage.setItem('lang', lang);
+        }
+
+        function setMode(mode) {
+            document.body.classList.remove('dark-mode');
+            if (mode === 'dark') document.body.classList.add('dark-mode');
+            else if (mode === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) document.body.classList.add('dark-mode');
+            localStorage.setItem('mode', mode);
+        }
+
+        function searchTools() {
+            var query = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.tool-card').forEach(function(card) {
+                var data = (card.getAttribute('data-search') + ' ' + card.textContent).toLowerCase();
+                card.style.display = data.includes(query) ? 'block' : 'none';
+            });
+        }
+
+        function share(platform) {
+            var url = window.location.href;
+            var text = 'Check out these free digital tools!';
+            if (platform === 'facebook') window.open('https://facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank');
+            else if (platform === 'twitter') window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text), '_blank');
+            else if (platform === 'whatsapp') window.open('https://wa.me/?text=' + encodeURIComponent(text + ' ' + url), '_blank');
+            else if (platform === 'copy') { navigator.clipboard.writeText(url); alert('✅ Link copied!'); }
+        }
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown-content').forEach(function(d) { d.classList.remove('show'); });
+            }
+        });
+
+        var savedLang = localStorage.getItem('lang') || 'en';
+        var savedMode = localStorage.getItem('mode') || 'auto';
+        setLang(savedLang);
+        setMode(savedMode);
+
+        window.addEventListener('scroll', function() { localStorage.setItem('scrollPos', window.scrollY); });
+        var savedScroll = localStorage.getItem('scrollPos');
+        if (savedScroll) window.scrollTo(0, parseInt(savedScroll));
+    </script>
+</body>
+</html>

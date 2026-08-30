@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregnancy Calculator | حاسبة الحمل والولادة</title>
+    <meta name="description" content="Calculate your pregnancy due date and track your pregnancy weeks.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh; line-height: 1.7; color: white;
+            display: flex; justify-content: center; align-items: center; padding: 20px;
+        }
+        .container { width: 100%; max-width: 550px; }
+        .glass-header { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+        .glass-header .icon { font-size: 3em; margin-bottom: 10px; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+        .glass-header h1 { font-size: 1.8em; margin-bottom: 5px; }
+        .tool-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); margin-bottom: 25px; }
+        .input-group { display: flex; gap: 10px; margin-bottom: 20px; }
+        .input-group div { flex: 1; text-align: center; }
+        .input-group label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.9em; }
+        .input-group input { width: 100%; padding: 15px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.2em; background: rgba(255,255,255,0.9); color: #333; text-align: center; direction: ltr; }
+        .input-group input:focus { outline: none; border-color: white; box-shadow: 0 0 20px rgba(255,255,255,0.4); }
+        button { width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .result { background: rgba(255,255,255,0.95); color: #333; border-radius: 12px; padding: 25px; margin-top: 20px; text-align: center; display: none; animation: fadeIn 0.5s; }
+        .result.show { display: block; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+        .result p { font-size: 1.2em; font-weight: bold; color: #667eea; white-space: pre-line; }
+        .info-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); text-align: center; }
+        .info-card h3 { margin-bottom: 15px; }
+        .info-card p { opacity: 0.95; font-size: 0.95em; text-align: justify; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: white; text-decoration: none; font-weight: bold; padding: 10px 20px; background: rgba(255,255,255,0.2); border-radius: 50px; }
+        .footer-text { text-align: center; margin-top: 20px; opacity: 0.8; font-size: 0.9em; }
+        .footer-text a { color: white; text-decoration: none; margin: 0 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" data-i18n="back">← Back to Home</a>
+        <header class="glass-header">
+            <div class="icon">🤰</div>
+            <h1 data-i18n="title">Pregnancy Calculator</h1>
+            <p data-i18n="subtitle">Calculate your due date and pregnancy weeks</p>
+        </header>
+        <div class="tool-card">
+            <div class="input-group">
+                <div><label data-i18n="year">Year</label><input type="text" id="year" placeholder="2024" maxlength="4"></div>
+                <div><label data-i18n="month">Month</label><input type="text" id="month" placeholder="01" maxlength="2"></div>
+                <div><label data-i18n="day">Day</label><input type="text" id="day" placeholder="15" maxlength="2"></div>
+            </div>
+            <button onclick="calculatePregnancy()" data-i18n="btn">✨ Calculate Due Date</button>
+            <div class="result" id="result"><p id="pregResult"></p></div>
+        </div>
+        <div class="info-card">
+            <h3 data-i18n="aboutTitle">About Pregnancy Calculator</h3>
+            <p data-i18n="aboutText">This free pregnancy calculator helps you estimate your due date based on your last menstrual period. The average pregnancy lasts about 40 weeks (280 days).</p>
+        </div>
+        <div class="footer-text">
+            <p data-i18n="footer">© 2026 My Digital Tools</p>
+            <p><a href="../privacy-policy.html" data-i18n="privacy">Privacy</a> | <a href="../contact.html" data-i18n="contact">Contact</a></p>
+        </div>
+    </div>
+    <script>
+        var translations = {
+            en: { back:'← Back to Home', title:'Pregnancy Calculator', subtitle:'Calculate your due date', year:'Year', month:'Month', day:'Day', btn:'✨ Calculate Due Date', aboutTitle:'About Pregnancy Calculator', aboutText:'This free pregnancy calculator helps you estimate your due date based on your last menstrual period. The average pregnancy lasts about 40 weeks (280 days).', dueDate:'📅 Estimated Due Date:', currentWeek:'🤰 Current Pregnancy Week:', trimester:'📊 Trimester:', weeks:'weeks', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter a valid date' },
+            ar: { back:'← العودة للرئيسية', title:'حاسبة الحمل والولادة', subtitle:'احسبي موعد ولادتك', year:'السنة', month:'الشهر', day:'اليوم', btn:'✨ احسبي موعد الولادة', aboutTitle:'عن حاسبة الحمل', aboutText:'حاسبة الحمل المجانية تساعدك على تقدير موعد الولادة بناءً على آخر دورة شهرية. متوسط مدة الحمل حوالي 40 أسبوعاً (280 يوماً).', dueDate:'📅 موعد الولادة المتوقع:', currentWeek:'🤰 أسبوع الحمل الحالي:', trimester:'📊 الثلث:', weeks:'أسبوع', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال تاريخ صحيح' },
+            fr: { back:'← Retour', title:'Calculatrice grossesse', subtitle:'Calculez votre date d\'accouchement', year:'Année', month:'Mois', day:'Jour', btn:'✨ Calculer', aboutTitle:'À propos', aboutText:'Cette calculatrice de grossesse gratuite vous aide à estimer votre date d\'accouchement.', dueDate:'📅 Date prévue:', currentWeek:'🤰 Semaine actuelle:', trimester:'📊 Trimestre:', weeks:'semaines', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez une date valide' },
+            tr: { back:'← Geri', title:'Hamilelik Hesaplama', subtitle:'Doğum tarihinizi hesaplayın', year:'Yıl', month:'Ay', day:'Gün', btn:'✨ Hesapla', aboutTitle:'Hakkında', aboutText:'Ücretsiz hamilelik hesaplayıcı, doğum tarihinizi tahmin etmenize yardımcı olur.', dueDate:'📅 Tahmini Doğum:', currentWeek:'🤰 Mevcut Hafta:', trimester:'📊 Trimester:', weeks:'hafta', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli bir tarih girin' }
+        };
+        var currentLang = localStorage.getItem('lang') || 'en';
+        function applyLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(function(el) {
+                var key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
+            });
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+        }
+        function calculatePregnancy() {
+            var y = document.getElementById('year').value.trim();
+            var m = document.getElementById('month').value.trim();
+            var d = document.getElementById('day').value.trim();
+            var arabic = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+            for (var i = 0; i < 10; i++) { y = y.replace(new RegExp(arabic[i], 'g'), i); m = m.replace(new RegExp(arabic[i], 'g'), i); d = d.replace(new RegExp(arabic[i], 'g'), i); }
+            var year = parseInt(y), month = parseInt(m), day = parseInt(d);
+            if (isNaN(year) || isNaN(month) || isNaN(day)) { alert(translations[currentLang].error); return; }
+            var lastPeriod = new Date(year, month - 1, day);
+            if (lastPeriod.getFullYear() !== year || lastPeriod.getMonth() !== month - 1 || lastPeriod.getDate() !== day) { alert(translations[currentLang].error); return; }
+            var dueDate = new Date(lastPeriod);
+            dueDate.setDate(dueDate.getDate() + 280);
+            var today = new Date();
+            var diffDays = Math.floor((today - lastPeriod) / (1000 * 60 * 60 * 24));
+            var currentWeek = Math.floor(diffDays / 7);
+            if (currentWeek < 0) currentWeek = 0;
+            if (currentWeek > 42) currentWeek = 42;
+            var trimester = currentWeek <= 13 ? '1' : currentWeek <= 26 ? '2' : '3';
+            var dueDateStr = dueDate.getFullYear() + '-' + (dueDate.getMonth()+1 < 10 ? '0' : '') + (dueDate.getMonth()+1) + '-' + (dueDate.getDate() < 10 ? '0' : '') + dueDate.getDate();
+            var text = translations[currentLang].dueDate + '\n' + dueDateStr + '\n\n' + translations[currentLang].currentWeek + '\n' + currentWeek + ' ' + translations[currentLang].weeks + '\n\n' + translations[currentLang].trimester + '\n' + trimester;
+            document.getElementById('pregResult').innerText = text;
+            document.getElementById('result').classList.add('show');
+        }
+        applyLang(currentLang);
+    </script>
+</body>
+</html>

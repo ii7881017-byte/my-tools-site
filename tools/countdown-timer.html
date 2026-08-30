@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer | مؤقت العد التنازلي</title>
+    <meta name="description" content="Set a countdown timer easily.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh; line-height: 1.7; color: white;
+            display: flex; justify-content: center; align-items: center; padding: 20px;
+        }
+        .container { width: 100%; max-width: 550px; }
+        .glass-header { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+        .glass-header .icon { font-size: 3em; margin-bottom: 10px; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+        .glass-header h1 { font-size: 1.8em; margin-bottom: 5px; }
+        .tool-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); margin-bottom: 25px; text-align: center; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; }
+        input { width: 100%; padding: 15px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.2em; background: rgba(255,255,255,0.9); color: #333; text-align: center; direction: ltr; margin-bottom: 15px; }
+        button { width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; margin-bottom: 10px; }
+        button:hover { transform: translateY(-2px); }
+        .timer-display { font-size: 3em; font-weight: bold; font-family: monospace; margin: 20px 0; display: none; }
+        .timer-display.show { display: block; }
+        .info-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); text-align: center; }
+        .info-card h3 { margin-bottom: 15px; }
+        .info-card p { opacity: 0.95; font-size: 0.95em; text-align: justify; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: white; text-decoration: none; font-weight: bold; padding: 10px 20px; background: rgba(255,255,255,0.2); border-radius: 50px; }
+        .footer-text { text-align: center; margin-top: 20px; opacity: 0.8; font-size: 0.9em; }
+        .footer-text a { color: white; text-decoration: none; margin: 0 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" data-i18n="back">← Back to Home</a>
+        <header class="glass-header">
+            <div class="icon">⏱️</div>
+            <h1 data-i18n="title">Countdown Timer</h1>
+            <p data-i18n="subtitle">Set a countdown timer easily</p>
+        </header>
+        <div class="tool-card">
+            <label data-i18n="minutes">Minutes:</label>
+            <input type="text" id="minutes" placeholder="5" maxlength="3">
+            <button onclick="startTimer()" data-i18n="startBtn">▶ Start</button>
+            <button onclick="stopTimer()" data-i18n="stopBtn" style="background:#dc2626;">■ Stop</button>
+            <div class="timer-display" id="timerDisplay"><p id="timerText">00:00</p></div>
+        </div>
+        <div class="info-card">
+            <h3 data-i18n="aboutTitle">About Countdown Timer</h3>
+            <p data-i18n="aboutText">Free countdown timer to help you manage your time.</p>
+        </div>
+        <div class="footer-text">
+            <p data-i18n="footer">© 2026 My Digital Tools</p>
+            <p><a href="../privacy-policy.html" data-i18n="privacy">Privacy</a> | <a href="../contact.html" data-i18n="contact">Contact</a></p>
+        </div>
+    </div>
+    <script>
+        var translations = {
+            en: { back:'← Back to Home', title:'Countdown Timer', subtitle:'Set a timer easily', minutes:'Minutes:', startBtn:'▶ Start', stopBtn:'■ Stop', aboutTitle:'About Countdown Timer', aboutText:'Free countdown timer to help you manage your time.', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter valid minutes', done:'⏰ Time is up!' },
+            ar: { back:'← العودة للرئيسية', title:'مؤقت العد التنازلي', subtitle:'اضبط مؤقتاً بسهولة', minutes:'الدقائق:', startBtn:'▶ ابدأ', stopBtn:'■ إيقاف', aboutTitle:'عن المؤقت', aboutText:'مؤقت عد تنازلي مجاني لمساعدتك على إدارة وقتك.', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال دقائق صحيحة', done:'⏰ انتهى الوقت!' },
+            fr: { back:'← Retour', title:'Minuterie', subtitle:'Réglez un minuteur', minutes:'Minutes:', startBtn:'▶ Démarrer', stopBtn:'■ Arrêter', aboutTitle:'À propos', aboutText:'Minuterie gratuite pour vous aider à gérer votre temps.', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez des minutes valides', done:'⏰ Temps écoulé!' },
+            tr: { back:'← Geri', title:'Geri Sayım', subtitle:'Sayaç ayarlayın', minutes:'Dakika:', startBtn:'▶ Başlat', stopBtn:'■ Durdur', aboutTitle:'Hakkında', aboutText:'Zamanınızı yönetmenize yardımcı olacak ücretsiz geri sayım sayacı.', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli dakika girin', done:'⏰ Süre doldu!' }
+        };
+        var currentLang = localStorage.getItem('lang') || 'en';
+        var timerInterval;
+        function applyLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(function(el) {
+                var key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
+            });
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+        }
+        function startTimer() {
+            var input = document.getElementById('minutes').value.trim();
+            var arabic = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+            for (var i = 0; i < 10; i++) input = input.replace(new RegExp(arabic[i], 'g'), i);
+            var minutes = parseInt(input);
+            if (isNaN(minutes) || minutes < 1) { alert(translations[currentLang].error); return; }
+            clearInterval(timerInterval);
+            var total = minutes * 60;
+            document.getElementById('timerDisplay').classList.add('show');
+            timerInterval = setInterval(function() {
+                var m = Math.floor(total / 60), s = total % 60;
+                document.getElementById('timerText').innerText = (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+                if (total <= 0) { clearInterval(timerInterval); alert(translations[currentLang].done); }
+                total--;
+            }, 1000);
+        }
+        function stopTimer() { clearInterval(timerInterval); }
+        applyLang(currentLang);
+    </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator | حاسبة الوزن المثالي المتقدمة</title>
+    <meta name="description" content="Calculate your BMI, get health tips and daily calorie needs.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh; line-height: 1.7; color: white;
+            display: flex; justify-content: center; align-items: center; padding: 20px;
+        }
+        .container { width: 100%; max-width: 550px; }
+        .glass-header { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+        .glass-header .icon { font-size: 3em; margin-bottom: 10px; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+        .glass-header h1 { font-size: 1.8em; margin-bottom: 5px; }
+        .tool-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); margin-bottom: 25px; }
+        .input-group { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .input-group div { flex: 1; min-width: 100px; text-align: center; }
+        .input-group label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.85em; }
+        .input-group input, .input-group select { width: 100%; padding: 12px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.1em; background: rgba(255,255,255,0.9); color: #333; text-align: center; direction: ltr; }
+        .input-group input:focus, .input-group select:focus { outline: none; border-color: white; }
+        button { width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .result { background: rgba(255,255,255,0.95); color: #333; border-radius: 12px; padding: 25px; margin-top: 20px; text-align: center; display: none; animation: fadeIn 0.5s; }
+        .result.show { display: block; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+        .result p { font-size: 1.2em; font-weight: bold; color: #667eea; white-space: pre-line; }
+        .info-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); text-align: center; }
+        .info-card h3 { margin-bottom: 15px; }
+        .info-card p { opacity: 0.95; font-size: 0.95em; text-align: justify; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: white; text-decoration: none; font-weight: bold; padding: 10px 20px; background: rgba(255,255,255,0.2); border-radius: 50px; }
+        .footer-text { text-align: center; margin-top: 20px; opacity: 0.8; font-size: 0.9em; }
+        .footer-text a { color: white; text-decoration: none; margin: 0 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" data-i18n="back">← Back to Home</a>
+        <header class="glass-header">
+            <div class="icon">⚖️</div>
+            <h1 data-i18n="title">BMI Calculator</h1>
+            <p data-i18n="subtitle">BMI + health tips + calories</p>
+        </header>
+        <div class="tool-card">
+            <div class="input-group">
+                <div><label data-i18n="weight">Weight (kg)</label><input type="text" id="weight" placeholder="70" maxlength="5"></div>
+                <div><label data-i18n="height">Height (cm)</label><input type="text" id="height" placeholder="170" maxlength="3"></div>
+                <div><label data-i18n="age">Age</label><input type="text" id="age" placeholder="25" maxlength="2"></div>
+            </div>
+            <div class="input-group">
+                <div>
+                    <label data-i18n="gender">Gender</label>
+                    <select id="gender">
+                        <option value="male" data-i18n="male">Male</option>
+                        <option value="female" data-i18n="female">Female</option>
+                    </select>
+                </div>
+            </div>
+            <button onclick="calculateBMI()" data-i18n="btn">✨ Calculate BMI</button>
+            <div class="result" id="result"><p id="bmiResult"></p></div>
+        </div>
+        <div class="info-card">
+            <h3 data-i18n="aboutTitle">About BMI Calculator</h3>
+            <p data-i18n="aboutText">Calculate your BMI, get personalized health tips and your daily calorie needs.</p>
+        </div>
+        <div class="footer-text">
+            <p data-i18n="footer">© 2026 My Digital Tools</p>
+            <p><a href="../privacy-policy.html" data-i18n="privacy">Privacy</a> | <a href="../contact.html" data-i18n="contact">Contact</a></p>
+        </div>
+    </div>
+    <script>
+        var translations = {
+            en: { back:'← Back to Home', title:'BMI Calculator', subtitle:'BMI + tips + calories', weight:'Weight (kg)', height:'Height (cm)', age:'Age', gender:'Gender', male:'Male', female:'Female', btn:'✨ Calculate BMI', aboutTitle:'About BMI Calculator', aboutText:'Calculate your BMI, get health tips and daily calorie needs.', underweight:'Underweight', normal:'Normal', overweight:'Overweight', obese:'Obese', yourBMI:'Your BMI:', category:'Category:', idealWeight:'Ideal Weight:', dailyCalories:'Daily Calories:', tip:'💡 Tip:', tipUnder:'You are underweight. Try eating more protein and healthy fats.', tipNormal:'Perfect! Maintain your healthy lifestyle.', tipOver:'You are overweight. Try regular exercise and balanced diet.', tipObese:'You are obese. Consult a doctor for a personalized plan.', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter valid values' },
+            ar: { back:'← العودة للرئيسية', title:'حاسبة الوزن المثالي', subtitle:'BMI + نصائح + سعرات', weight:'الوزن (كجم)', height:'الطول (سم)', age:'العمر', gender:'الجنس', male:'ذكر', female:'أنثى', btn:'✨ احسب BMI', aboutTitle:'عن الحاسبة', aboutText:'احسب مؤشر كتلة الجسم واحصل على نصائح صحية وسعراتك اليومية.', underweight:'نقص وزن', normal:'طبيعي', overweight:'زيادة وزن', obese:'سمنة', yourBMI:'مؤشرك:', category:'التصنيف:', idealWeight:'الوزن المثالي:', dailyCalories:'السعرات اليومية:', tip:'💡 نصيحة:', tipUnder:'وزنك منخفض. حاول تناول المزيد من البروتين والدهون الصحية.', tipNormal:'ممتاز! حافظ على نمط حياتك الصحي.', tipOver:'وزنك زائد. جرب ممارسة الرياضة ونظام غذائي متوازن.', tipObese:'لديك سمنة. استشر طبيباً لوضع خطة مناسبة.', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال قيم صحيحة' },
+            fr: { back:'← Retour', title:'Calculatrice IMC', subtitle:'IMC + conseils + calories', weight:'Poids (kg)', height:'Taille (cm)', age:'Âge', gender:'Genre', male:'Homme', female:'Femme', btn:'✨ Calculer IMC', aboutTitle:'À propos', aboutText:'Calculez votre IMC et obtenez des conseils santé.', underweight:'Insuffisance', normal:'Normal', overweight:'Surpoids', obese:'Obésité', yourBMI:'Votre IMC:', category:'Catégorie:', idealWeight:'Poids idéal:', dailyCalories:'Calories/jour:', tip:'💡 Conseil:', tipUnder:'Poids faible. Mangez plus de protéines.', tipNormal:'Parfait! Continuez.', tipOver:'Surpoids. Faites du sport.', tipObese:'Obésité. Consultez un médecin.', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez des valeurs valides' },
+            tr: { back:'← Geri', title:'BMI Hesaplama', subtitle:'BMI + tavsiyeler', weight:'Kilo (kg)', height:'Boy (cm)', age:'Yaş', gender:'Cinsiyet', male:'Erkek', female:'Kadın', btn:'✨ Hesapla', aboutTitle:'Hakkında', aboutText:'BMI hesaplayın ve sağlık tavsiyeleri alın.', underweight:'Zayıf', normal:'Normal', overweight:'Fazla kilolu', obese:'Obez', yourBMI:'BMI:', category:'Kategori:', idealWeight:'İdeal Kilo:', dailyCalories:'Günlük Kalori:', tip:'💡 Tavsiye:', tipUnder:'Zayıfsınız. Daha fazla protein alın.', tipNormal:'Mükemmel! Devam edin.', tipOver:'Fazla kilolu. Spor yapın.', tipObese:'Obezsiniz. Doktora danışın.', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli değerler girin' }
+        };
+        var currentLang = localStorage.getItem('lang') || 'en';
+        function applyLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(function(el) {
+                var key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
+            });
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+        }
+        function calculateBMI() {
+            var w = document.getElementById('weight').value.trim();
+            var h = document.getElementById('height').value.trim();
+            var a = document.getElementById('age').value.trim();
+            var arabic = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+            for (var i = 0; i < 10; i++) { w = w.replace(new RegExp(arabic[i], 'g'), i); h = h.replace(new RegExp(arabic[i], 'g'), i); a = a.replace(new RegExp(arabic[i], 'g'), i); }
+            var weight = parseFloat(w), height = parseFloat(h) / 100, age = parseInt(a);
+            if (isNaN(weight) || isNaN(height) || isNaN(age) || weight <= 0 || height <= 0 || age <= 0) { alert(translations[currentLang].error); return; }
+            var bmi = (weight / (height * height)).toFixed(1);
+            var category, tip;
+            if (bmi < 18.5) { category = translations[currentLang].underweight; tip = translations[currentLang].tipUnder; }
+            else if (bmi < 25) { category = translations[currentLang].normal; tip = translations[currentLang].tipNormal; }
+            else if (bmi < 30) { category = translations[currentLang].overweight; tip = translations[currentLang].tipOver; }
+            else { category = translations[currentLang].obese; tip = translations[currentLang].tipObese; }
+            var idealWeight = (22 * (height * height)).toFixed(1);
+            var gender = document.getElementById('gender').value;
+            var bmr = gender === 'male' ? 10 * weight + 6.25 * (height * 100) - 5 * age + 5 : 10 * weight + 6.25 * (height * 100) - 5 * age - 161;
+            var calories = Math.round(bmr * 1.4);
+            var text = translations[currentLang].yourBMI + ' ' + bmi + '\n\n' + translations[currentLang].category + ' ' + category + '\n\n' + translations[currentLang].idealWeight + ' ' + idealWeight + ' kg\n\n' + translations[currentLang].dailyCalories + ' ' + calories + '\n\n' + translations[currentLang].tip + '\n' + tip;
+            document.getElementById('bmiResult').innerText = text;
+            document.getElementById('result').classList.add('show');
+        }
+        applyLang(currentLang);
+    </script>
+</body>
+</html>
