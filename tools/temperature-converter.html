@@ -2,17 +2,13 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <script src="../tools-settings.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Temperature Converter | محول الحرارة المتقدم</title>
+    <title>Temperature Converter | محول الحرارة</title>
     <meta name="description" content="Convert temperature with all units at once and see the formula used.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            min-height: 100vh; line-height: 1.7; color: white;
-            display: flex; justify-content: center; align-items: center; padding: 20px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); min-height: 100vh; line-height: 1.7; color: white; display: flex; justify-content: center; align-items: center; padding: 20px; }
         .container { width: 100%; max-width: 550px; }
         .glass-header { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
         .glass-header .icon { font-size: 3em; margin-bottom: 10px; animation: bounce 2s infinite; }
@@ -20,15 +16,15 @@
         .glass-header h1 { font-size: 1.8em; margin-bottom: 5px; }
         .tool-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); margin-bottom: 25px; }
         label { display: block; font-weight: bold; margin-bottom: 8px; text-align: center; }
-        input, select { width: 100%; padding: 15px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.1em; background: rgba(255,255,255,0.9); color: #333; text-align: center; direction: ltr; margin-bottom: 15px; }
+        input, select { width: 100%; padding: 15px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.1em; background: rgba(255,255,255,0.15); color: white; text-align: center; direction: ltr; margin-bottom: 15px; }
         input:focus, select:focus { outline: none; border-color: white; }
+        select option { background: rgba(255,255,255,0.9); color: #333; }
         button { width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; }
         button:hover { transform: translateY(-2px); }
         .result { background: rgba(255,255,255,0.95); color: #333; border-radius: 12px; padding: 25px; margin-top: 20px; text-align: center; display: none; animation: fadeIn 0.5s; }
         .result.show { display: block; }
         @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
         .result p { font-size: 1.2em; font-weight: bold; color: #667eea; white-space: pre-line; }
-        .formula { background: #e0e7ff; color: #3730a3; padding: 12px; border-radius: 8px; margin-top: 10px; font-size: 0.9em; font-family: monospace; }
         .info-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); text-align: center; }
         .info-card h3 { margin-bottom: 15px; }
         .info-card p { opacity: 0.95; font-size: 0.95em; text-align: justify; }
@@ -43,7 +39,7 @@
         <header class="glass-header">
             <div class="icon">🌡️</div>
             <h1 data-i18n="title">Temperature Converter</h1>
-            <p data-i18n="subtitle">All units + formula</p>
+            <p data-i18n="subtitle">All units at once</p>
         </header>
         <div class="tool-card">
             <label data-i18n="value">Temperature:</label>
@@ -59,7 +55,7 @@
         </div>
         <div class="info-card">
             <h3 data-i18n="aboutTitle">About Temperature Converter</h3>
-            <p data-i18n="aboutText">Convert temperature to all units at once and see the formula used.</p>
+            <p data-i18n="aboutText">Convert temperature to all units at once and see the formula.</p>
         </div>
         <div class="footer-text">
             <p data-i18n="footer">© 2026 My Digital Tools</p>
@@ -68,20 +64,13 @@
     </div>
     <script>
         var translations = {
-            en: { back:'← Back to Home', title:'Temperature Converter', subtitle:'All units at once', value:'Temperature:', from:'From:', btn:'✨ Convert All', aboutTitle:'About Temperature Converter', aboutText:'Convert temperature to all units at once and see the formula.', celsius:'Celsius:', fahrenheit:'Fahrenheit:', kelvin:'Kelvin:', formula:'📐 Formula:', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter a valid temperature' },
-            ar: { back:'← العودة للرئيسية', title:'محول الحرارة المتقدم', subtitle:'كل الوحدات مرة واحدة', value:'درجة الحرارة:', from:'من:', btn:'✨ حول الكل', aboutTitle:'عن المحول', aboutText:'حول درجة الحرارة لجميع الوحدات مرة واحدة وشاهد الصيغة المستخدمة.', celsius:'مئوي:', fahrenheit:'فهرنهايت:', kelvin:'كلفن:', formula:'📐 الصيغة:', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال درجة حرارة صحيحة' },
-            fr: { back:'← Retour', title:'Convertisseur température', subtitle:'Toutes les unités', value:'Température:', from:'De:', btn:'✨ Tout convertir', aboutTitle:'À propos', aboutText:'Convertissez la température dans toutes les unités et voyez la formule.', celsius:'Celsius:', fahrenheit:'Fahrenheit:', kelvin:'Kelvin:', formula:'📐 Formule:', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez une température valide' },
-            tr: { back:'← Geri', title:'Sıcaklık Çevirici', subtitle:'Tüm birimler', value:'Sıcaklık:', from:'Kimden:', btn:'✨ Hepsini Çevir', aboutTitle:'Hakkında', aboutText:'Sıcaklığı tüm birimlere çevirin ve formülü görün.', celsius:'Celsius:', fahrenheit:'Fahrenheit:', kelvin:'Kelvin:', formula:'📐 Formül:', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli sıcaklık girin' }
+            en: { back:'← Back to Home', title:'Temperature Converter', subtitle:'All units at once', value:'Temperature:', from:'From:', btn:'✨ Convert All', aboutTitle:'About Temperature Converter', aboutText:'Convert temperature to all units at once.', celsius:'Celsius:', fahrenheit:'Fahrenheit:', kelvin:'Kelvin:', formula:'📐 Formula:', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter a valid temperature' },
+            ar: { back:'← العودة للرئيسية', title:'محول الحرارة', subtitle:'كل الوحدات', value:'درجة الحرارة:', from:'من:', btn:'✨ حول الكل', aboutTitle:'عن المحول', aboutText:'حول درجة الحرارة لجميع الوحدات مرة واحدة.', celsius:'مئوي:', fahrenheit:'فهرنهايت:', kelvin:'كلفن:', formula:'📐 الصيغة:', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال درجة حرارة صحيحة' },
+            fr: { back:'← Retour', title:'Convertisseur température', subtitle:'Toutes unités', value:'Température:', from:'De:', btn:'✨ Convertir', aboutTitle:'À propos', aboutText:'Convertissez la température dans toutes les unités.', celsius:'Celsius:', fahrenheit:'Fahrenheit:', kelvin:'Kelvin:', formula:'📐 Formule:', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez une température valide' },
+            tr: { back:'← Geri', title:'Sıcaklık Çevirici', subtitle:'Tüm birimler', value:'Sıcaklık:', from:'Kimden:', btn:'✨ Çevir', aboutTitle:'Hakkında', aboutText:'Sıcaklığı tüm birimlere çevirin.', celsius:'Celsius:', fahrenheit:'Fahrenheit:', kelvin:'Kelvin:', formula:'📐 Formül:', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli sıcaklık girin' }
         };
         var currentLang = localStorage.getItem('lang') || 'en';
-        function applyLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(function(el) {
-                var key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
-            });
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-        }
+        function applyLang(lang) { currentLang = lang; document.querySelectorAll('[data-i18n]').forEach(function(el) { var key = el.getAttribute('data-i18n'); if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key]; }); document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr'; }
         function convertTemp() {
             var input = document.getElementById('tempValue').value.trim();
             var arabic = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
@@ -90,9 +79,9 @@
             if (isNaN(value)) { alert(translations[currentLang].error); return; }
             var fromUnit = document.getElementById('fromUnit').value;
             var celsius;
-            if (fromUnit === 'celsius') { celsius = value; }
-            else if (fromUnit === 'fahrenheit') { celsius = (value - 32) * 5/9; }
-            else { celsius = value - 273.15; }
+            if (fromUnit === 'celsius') celsius = value;
+            else if (fromUnit === 'fahrenheit') celsius = (value - 32) * 5/9;
+            else celsius = value - 273.15;
             var fahrenheit = (celsius * 9/5) + 32;
             var kelvin = celsius + 273.15;
             var formulaText = fromUnit === 'celsius' ? 'C → F: (C × 9/5) + 32\nC → K: C + 273.15' : fromUnit === 'fahrenheit' ? 'F → C: (F - 32) × 5/9' : 'K → C: K - 273.15';

@@ -2,17 +2,13 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <script src="../tools-settings.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number to Words | تحويل الأرقام إلى كتابة</title>
     <meta name="description" content="Convert numbers to written words.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            min-height: 100vh; line-height: 1.7; color: white;
-            display: flex; justify-content: center; align-items: center; padding: 20px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); min-height: 100vh; line-height: 1.7; color: white; display: flex; justify-content: center; align-items: center; padding: 20px; }
         .container { width: 100%; max-width: 550px; }
         .glass-header { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
         .glass-header .icon { font-size: 3em; margin-bottom: 10px; animation: bounce 2s infinite; }
@@ -20,7 +16,7 @@
         .glass-header h1 { font-size: 1.8em; margin-bottom: 5px; }
         .tool-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); margin-bottom: 25px; }
         label { display: block; font-weight: bold; margin-bottom: 8px; text-align: center; }
-        input { width: 100%; padding: 15px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.2em; background: rgba(255,255,255,0.9); color: #333; text-align: center; direction: ltr; margin-bottom: 15px; }
+        input { width: 100%; padding: 15px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.2em; background: rgba(255,255,255,0.15); color: white; text-align: center; direction: ltr; margin-bottom: 15px; }
         button { width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; }
         button:hover { transform: translateY(-2px); }
         .result { background: rgba(255,255,255,0.95); color: #333; border-radius: 12px; padding: 20px; margin-top: 20px; text-align: center; display: none; animation: fadeIn 0.5s; }
@@ -41,7 +37,7 @@
         <header class="glass-header">
             <div class="icon">🔢</div>
             <h1 data-i18n="title">Number to Words</h1>
-            <p data-i18n="subtitle">Convert numbers to written words</p>
+            <p data-i18n="subtitle">Convert numbers to words</p>
         </header>
         <div class="tool-card">
             <label data-i18n="number">Enter Number (0-999):</label>
@@ -51,7 +47,7 @@
         </div>
         <div class="info-card">
             <h3 data-i18n="aboutTitle">About Number to Words</h3>
-            <p data-i18n="aboutText">Convert numbers to written words easily. Perfect for checks and documents.</p>
+            <p data-i18n="aboutText">Convert numbers to written words easily.</p>
         </div>
         <div class="footer-text">
             <p data-i18n="footer">© 2026 My Digital Tools</p>
@@ -60,23 +56,16 @@
     </div>
     <script>
         var translations = {
-            en: { back:'← Back to Home', title:'Number to Words', subtitle:'Convert numbers to words', number:'Enter Number (0-999):', btn:'✨ Convert', aboutTitle:'About Number to Words', aboutText:'Convert numbers to written words easily. Perfect for checks and documents.', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter a number between 0 and 999' },
-            ar: { back:'← العودة للرئيسية', title:'تحويل الأرقام إلى كتابة', subtitle:'حول الأرقام إلى كلمات', number:'أدخل رقماً (0-999):', btn:'✨ حول', aboutTitle:'عن تحويل الأرقام', aboutText:'حول الأرقام إلى كلمات مكتوبة بسهولة. مثالي للشيكات والمستندات.', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال رقم بين 0 و 999' },
-            fr: { back:'← Retour', title:'Nombre en mots', subtitle:'Convertissez en mots', number:'Entrez un nombre (0-999):', btn:'✨ Convertir', aboutTitle:'À propos', aboutText:'Convertissez facilement les nombres en mots.', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez un nombre entre 0 et 999' },
-            tr: { back:'← Geri', title:'Sayıdan Yazıya', subtitle:'Sayıları yazıya çevirin', number:'Sayı girin (0-999):', btn:'✨ Çevir', aboutTitle:'Hakkında', aboutText:'Sayıları kolayca yazıya çevirin.', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ 0 ile 999 arası bir sayı girin' }
+            en: { back:'← Back to Home', title:'Number to Words', subtitle:'Convert numbers', number:'Enter Number (0-999):', btn:'✨ Convert', aboutTitle:'About Number to Words', aboutText:'Convert numbers to written words easily.', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter a number between 0 and 999' },
+            ar: { back:'← العودة للرئيسية', title:'تحويل الأرقام إلى كتابة', subtitle:'حول الأرقام', number:'أدخل رقماً (0-999):', btn:'✨ حول', aboutTitle:'عن تحويل الأرقام', aboutText:'حول الأرقام إلى كلمات مكتوبة بسهولة.', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال رقم بين 0 و 999' },
+            fr: { back:'← Retour', title:'Nombre en mots', subtitle:'Convertissez', number:'Entrez un nombre (0-999):', btn:'✨ Convertir', aboutTitle:'À propos', aboutText:'Convertissez facilement les nombres en mots.', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez un nombre entre 0 et 999' },
+            tr: { back:'← Geri', title:'Sayıdan Yazıya', subtitle:'Çevirin', number:'Sayı girin (0-999):', btn:'✨ Çevir', aboutTitle:'Hakkında', aboutText:'Sayıları kolayca yazıya çevirin.', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ 0 ile 999 arası sayı girin' }
         };
         var currentLang = localStorage.getItem('lang') || 'en';
         var ones = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
         var teens = ['Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
         var tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
-        function applyLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(function(el) {
-                var key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
-            });
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-        }
+        function applyLang(lang) { currentLang = lang; document.querySelectorAll('[data-i18n]').forEach(function(el) { var key = el.getAttribute('data-i18n'); if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key]; }); document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr'; }
         function convertNumber() {
             var input = document.getElementById('number').value.trim();
             var arabic = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];

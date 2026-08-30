@@ -2,17 +2,13 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <script src="tools-settings.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy | سياسة الخصوصية</title>
     <meta name="description" content="Privacy Policy for My Digital Tools.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            min-height: 100vh; line-height: 1.7; color: white;
-            display: flex; justify-content: center; align-items: center; padding: 20px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); min-height: 100vh; line-height: 1.7; color: white; display: flex; justify-content: center; align-items: center; padding: 20px; }
         .container { width: 100%; max-width: 650px; }
         .glass-header { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
         .glass-header .icon { font-size: 3em; margin-bottom: 10px; }
@@ -35,15 +31,15 @@
         </header>
         <div class="glass-card">
             <h2 data-i18n="h1">1. Introduction</h2>
-            <p data-i18n="p1">Welcome to My Digital Tools. We respect your privacy and are committed to protecting your personal data.</p>
+            <p data-i18n="p1">Welcome to My Digital Tools. We respect your privacy.</p>
             <h2 data-i18n="h2">2. Information We Collect</h2>
-            <p data-i18n="p2">Our website does not collect any personal information. All tools work directly in your browser without storing any data.</p>
+            <p data-i18n="p2">Our website does not collect any personal information.</p>
             <h2 data-i18n="h3">3. Cookies</h2>
-            <p data-i18n="p3">We may use cookies to improve your browsing experience. Third-party services like Google AdSense may also use cookies.</p>
+            <p data-i18n="p3">We may use cookies to improve your browsing experience.</p>
             <h2 data-i18n="h4">4. Google AdSense</h2>
-            <p data-i18n="p4">We use Google AdSense to display ads. Google may use cookies to serve ads based on your visits.</p>
+            <p data-i18n="p4">We use Google AdSense to display ads.</p>
             <h2 data-i18n="h5">5. Contact</h2>
-            <p data-i18n="p5">If you have questions, contact us at: contact@digitaltools-ar.com</p>
+            <p data-i18n="p5">If you have questions: contact@digitaltools-ar.com</p>
         </div>
         <div class="footer-text">
             <p data-i18n="footer">© 2026 My Digital Tools</p>
@@ -52,21 +48,13 @@
     </div>
     <script>
         var translations = {
-            en: { back:'← Back to Home', title:'Privacy Policy', subtitle:'Last updated: 2026', h1:'1. Introduction', p1:'Welcome to My Digital Tools. We respect your privacy and are committed to protecting your personal data.', h2:'2. Information We Collect', p2:'Our website does not collect any personal information. All tools work directly in your browser without storing any data.', h3:'3. Cookies', p3:'We may use cookies to improve your browsing experience. Third-party services like Google AdSense may also use cookies.', h4:'4. Google AdSense', p4:'We use Google AdSense to display ads. Google may use cookies to serve ads based on your visits.', h5:'5. Contact', p5:'If you have questions, contact us at: contact@digitaltools-ar.com', footer:'© 2026 My Digital Tools', about:'About', contact:'Contact' },
-            ar: { back:'← العودة للرئيسية', title:'سياسة الخصوصية', subtitle:'آخر تحديث: 2026', h1:'1. مقدمة', p1:'مرحباً بكم في أدواتي الرقمية. نحن نحترم خصوصيتك ونلتزم بحماية بياناتك الشخصية.', h2:'2. المعلومات التي نجمعها', p2:'موقعنا لا يجمع أي معلومات شخصية. جميع الأدوات تعمل مباشرة في متصفحك بدون تخزين أي بيانات.', h3:'3. ملفات تعريف الارتباط', p3:'قد نستخدم ملفات تعريف الارتباط لتحسين تجربة التصفح. قد تستخدم خدمات الطرف الثالث مثل جوجل أدسنس ملفات تعريف الارتباط أيضاً.', h4:'4. جوجل أدسنس', p4:'نستخدم جوجل أدسنس لعرض الإعلانات. قد تستخدم جوجل ملفات تعريف الارتباط لعرض إعلانات بناءً على زياراتك.', h5:'5. اتصل بنا', p5:'إذا كان لديك أسئلة، تواصل معنا على: contact@digitaltools-ar.com', footer:'© 2026 أدواتي الرقمية', about:'من نحن', contact:'اتصل بنا' },
-            fr: { back:'← Retour', title:'Confidentialité', subtitle:'Dernière mise à jour: 2026', h1:'1. Introduction', p1:'Bienvenue sur Mes Outils Numériques. Nous respectons votre vie privée.', h2:'2. Informations collectées', p2:'Notre site ne collecte aucune information personnelle.', h3:'3. Cookies', p3:'Nous pouvons utiliser des cookies pour améliorer votre expérience.', h4:'4. Google AdSense', p4:'Nous utilisons Google AdSense pour afficher des publicités.', h5:'5. Contact', p5:'Pour toute question: contact@digitaltools-ar.com', footer:'© 2026 Mes Outils', about:'À propos', contact:'Contact' },
-            tr: { back:'← Geri', title:'Gizlilik Politikası', subtitle:'Son güncelleme: 2026', h1:'1. Giriş', p1:'Dijital Araçlarıma Hoş Geldiniz. Gizliliğinize saygı duyuyoruz.', h2:'2. Toplanan Bilgiler', p2:'Sitemiz hiçbir kişisel bilgi toplamaz.', h3:'3. Çerezler', p3:'Deneyiminizi geliştirmek için çerezler kullanabiliriz.', h4:'4. Google AdSense', p4:'Reklamları görüntülemek için Google AdSense kullanıyoruz.', h5:'5. İletişim', p5:'Sorularınız için: contact@digitaltools-ar.com', footer:'© 2026 Dijital Araçlar', about:'Hakkında', contact:'İletişim' }
+            en: { back:'← Back to Home', title:'Privacy Policy', subtitle:'Last updated: 2026', h1:'1. Introduction', p1:'Welcome to My Digital Tools. We respect your privacy.', h2:'2. Information We Collect', p2:'Our website does not collect any personal information.', h3:'3. Cookies', p3:'We may use cookies to improve your browsing experience.', h4:'4. Google AdSense', p4:'We use Google AdSense to display ads.', h5:'5. Contact', p5:'If you have questions: contact@digitaltools-ar.com', footer:'© 2026 My Digital Tools', about:'About', contact:'Contact' },
+            ar: { back:'← العودة للرئيسية', title:'سياسة الخصوصية', subtitle:'آخر تحديث: 2026', h1:'1. مقدمة', p1:'مرحباً بكم في أدواتي الرقمية. نحن نحترم خصوصيتك.', h2:'2. المعلومات التي نجمعها', p2:'موقعنا لا يجمع أي معلومات شخصية.', h3:'3. ملفات تعريف الارتباط', p3:'قد نستخدم ملفات تعريف الارتباط لتحسين تجربتك.', h4:'4. جوجل أدسنس', p4:'نستخدم جوجل أدسنس لعرض الإعلانات.', h5:'5. اتصل بنا', p5:'للأسئلة: contact@digitaltools-ar.com', footer:'© 2026 أدواتي الرقمية', about:'من نحن', contact:'اتصل بنا' },
+            fr: { back:'← Retour', title:'Confidentialité', subtitle:'Mise à jour: 2026', h1:'1. Introduction', p1:'Bienvenue. Nous respectons votre vie privée.', h2:'2. Informations', p2:'Notre site ne collecte aucune information.', h3:'3. Cookies', p3:'Nous utilisons des cookies.', h4:'4. Google AdSense', p4:'Nous utilisons AdSense.', h5:'5. Contact', p5:'Contact: contact@digitaltools-ar.com', footer:'© 2026 Mes Outils', about:'À propos', contact:'Contact' },
+            tr: { back:'← Geri', title:'Gizlilik', subtitle:'Güncelleme: 2026', h1:'1. Giriş', p1:'Hoş geldiniz. Gizliliğinize saygı duyuyoruz.', h2:'2. Bilgiler', p2:'Sitemiz bilgi toplamaz.', h3:'3. Çerezler', p3:'Çerezler kullanabiliriz.', h4:'4. AdSense', p4:'AdSense kullanıyoruz.', h5:'5. İletişim', p5:'İletişim: contact@digitaltools-ar.com', footer:'© 2026 Dijital Araçlar', about:'Hakkında', contact:'İletişim' }
         };
         var currentLang = localStorage.getItem('lang') || 'en';
-        function applyLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(function(el) {
-                var key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
-            });
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-            document.documentElement.lang = lang;
-        }
+        function applyLang(lang) { currentLang = lang; document.querySelectorAll('[data-i18n]').forEach(function(el) { var key = el.getAttribute('data-i18n'); if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key]; }); document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr'; }
         applyLang(currentLang);
     </script>
 </body>

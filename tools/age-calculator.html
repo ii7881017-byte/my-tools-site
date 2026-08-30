@@ -2,17 +2,13 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <script src="../tools-settings.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Age Calculator | حاسبة العمر المتقدمة</title>
-    <meta name="description" content="Calculate your exact age in years, months, days, hours and know your zodiac sign.">
+    <title>Age Calculator | حاسبة العمر</title>
+    <meta name="description" content="Calculate your exact age in years, months and days.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            min-height: 100vh; line-height: 1.7; color: white;
-            display: flex; justify-content: center; align-items: center; padding: 20px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); min-height: 100vh; line-height: 1.7; color: white; display: flex; justify-content: center; align-items: center; padding: 20px; }
         .container { width: 100%; max-width: 550px; }
         .glass-header { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
         .glass-header .icon { font-size: 3em; margin-bottom: 10px; animation: bounce 2s infinite; }
@@ -22,7 +18,7 @@
         .input-group { display: flex; gap: 10px; margin-bottom: 20px; }
         .input-group div { flex: 1; text-align: center; }
         .input-group label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.9em; }
-        .input-group input { width: 100%; padding: 15px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.2em; background: rgba(255,255,255,0.9); color: #333; text-align: center; direction: ltr; }
+        .input-group input { width: 100%; padding: 15px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.2em; background: rgba(255,255,255,0.15); color: white; text-align: center; direction: ltr; }
         .input-group input:focus { outline: none; border-color: white; box-shadow: 0 0 20px rgba(255,255,255,0.4); }
         button { width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; }
         button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
@@ -30,7 +26,6 @@
         .result.show { display: block; }
         @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
         .result p { font-size: 1.3em; font-weight: bold; color: #667eea; white-space: pre-line; }
-        .zodiac { font-size: 2em; margin-top: 10px; }
         .info-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); text-align: center; }
         .info-card h3 { margin-bottom: 15px; }
         .info-card p { opacity: 0.95; font-size: 0.95em; text-align: justify; }
@@ -45,7 +40,7 @@
         <header class="glass-header">
             <div class="icon">🎂</div>
             <h1 data-i18n="title">Age Calculator</h1>
-            <p data-i18n="subtitle">Age + zodiac sign</p>
+            <p data-i18n="subtitle">Calculate your exact age</p>
         </header>
         <div class="tool-card">
             <div class="input-group">
@@ -58,7 +53,7 @@
         </div>
         <div class="info-card">
             <h3 data-i18n="aboutTitle">About Age Calculator</h3>
-            <p data-i18n="aboutText">Calculate your exact age in years, months, days, hours, minutes and know your zodiac sign.</p>
+            <p data-i18n="aboutText">Our free age calculator helps you determine your exact age in years, months, and days.</p>
         </div>
         <div class="footer-text">
             <p data-i18n="footer">© 2026 My Digital Tools</p>
@@ -67,34 +62,13 @@
     </div>
     <script>
         var translations = {
-            en: { back:'← Back to Home', title:'Age Calculator', subtitle:'Age + zodiac', year:'Year', month:'Month', day:'Day', btn:'✨ Calculate My Age', aboutTitle:'About Age Calculator', aboutText:'Calculate your exact age in years, months, days, hours, minutes and know your zodiac sign.', years:'Years', months:'Months', days:'Days', hours:'Hours', minutes:'Minutes', result:'🎉 Your Age:', zodiac:'♈ Your Zodiac:', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter a valid date' },
-            ar: { back:'← العودة للرئيسية', title:'حاسبة العمر المتقدمة', subtitle:'العمر + البرج', year:'السنة', month:'الشهر', day:'اليوم', btn:'✨ احسب عمري', aboutTitle:'عن حاسبة العمر', aboutText:'احسب عمرك بدقة بالسنوات والأشهر والأيام والساعات والدقائق واعرف برجك الفلكي.', years:'سنة', months:'شهر', days:'يوم', hours:'ساعة', minutes:'دقيقة', result:'🎉 عمرك:', zodiac:'♈ برجك:', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال تاريخ صحيح' },
-            fr: { back:'← Retour', title:'Calculatrice d\'âge', subtitle:'Âge + zodiaque', year:'Année', month:'Mois', day:'Jour', btn:'✨ Calculer', aboutTitle:'À propos', aboutText:'Calculez votre âge exact et connaissez votre signe du zodiaque.', years:'Ans', months:'Mois', days:'Jours', hours:'Heures', minutes:'Minutes', result:'🎉 Votre âge:', zodiac:'♈ Votre signe:', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez une date valide' },
-            tr: { back:'← Geri', title:'Yaş Hesaplama', subtitle:'Yaş + burç', year:'Yıl', month:'Ay', day:'Gün', btn:'✨ Hesapla', aboutTitle:'Hakkında', aboutText:'Yaşınızı tam olarak hesaplayın ve burcunuzu öğrenin.', years:'Yıl', months:'Ay', days:'Gün', hours:'Saat', minutes:'Dakika', result:'🎉 Yaşınız:', zodiac:'♈ Burcunuz:', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli tarih girin' }
+            en: { back:'← Back to Home', title:'Age Calculator', subtitle:'Calculate your exact age', year:'Year', month:'Month', day:'Day', btn:'✨ Calculate My Age', aboutTitle:'About Age Calculator', aboutText:'Our free age calculator helps you determine your exact age.', years:'Years', months:'Months', days:'Days', result:'🎉 Your Age:', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter a valid date' },
+            ar: { back:'← العودة للرئيسية', title:'حاسبة العمر', subtitle:'احسب عمرك بدقة', year:'السنة', month:'الشهر', day:'اليوم', btn:'✨ احسب عمري', aboutTitle:'عن حاسبة العمر', aboutText:'حاسبة العمر المجانية تساعدك على معرفة عمرك بدقة.', years:'سنة', months:'شهر', days:'يوم', result:'🎉 عمرك هو:', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال تاريخ صحيح' },
+            fr: { back:'← Retour', title:'Calculatrice d\'âge', subtitle:'Calculez votre âge', year:'Année', month:'Mois', day:'Jour', btn:'✨ Calculer', aboutTitle:'À propos', aboutText:'Notre calculatrice gratuite vous aide à déterminer votre âge.', years:'Ans', months:'Mois', days:'Jours', result:'🎉 Votre âge:', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez une date valide' },
+            tr: { back:'← Geri', title:'Yaş Hesaplama', subtitle:'Yaşınızı hesaplayın', year:'Yıl', month:'Ay', day:'Gün', btn:'✨ Hesapla', aboutTitle:'Hakkında', aboutText:'Ücretsiz yaş hesaplama aracımız yaşınızı belirler.', years:'Yıl', months:'Ay', days:'Gün', result:'🎉 Yaşınız:', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli tarih girin' }
         };
         var currentLang = localStorage.getItem('lang') || 'en';
-        function applyLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(function(el) {
-                var key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
-            });
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-        }
-        function getZodiac(month, day) {
-            if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) return '♈ Aries';
-            if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) return '♉ Taurus';
-            if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) return '♊ Gemini';
-            if ((month == 6 && day >= 21) || (month == 7 && day <= 22)) return '♋ Cancer';
-            if ((month == 7 && day >= 23) || (month == 8 && day <= 22)) return '♌ Leo';
-            if ((month == 8 && day >= 23) || (month == 9 && day <= 22)) return '♍ Virgo';
-            if ((month == 9 && day >= 23) || (month == 10 && day <= 22)) return '♎ Libra';
-            if ((month == 10 && day >= 23) || (month == 11 && day <= 21)) return '♏ Scorpio';
-            if ((month == 11 && day >= 22) || (month == 12 && day <= 21)) return '♐ Sagittarius';
-            if ((month == 12 && day >= 22) || (month == 1 && day <= 19)) return '♑ Capricorn';
-            if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) return '♒ Aquarius';
-            return '♓ Pisces';
-        }
+        function applyLang(lang) { currentLang = lang; document.querySelectorAll('[data-i18n]').forEach(function(el) { var key = el.getAttribute('data-i18n'); if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key]; }); document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr'; }
         function calculateAge() {
             var y = document.getElementById('year').value.trim();
             var m = document.getElementById('month').value.trim();
@@ -107,17 +81,12 @@
             if (birthDate.getFullYear() !== year || birthDate.getMonth() !== month - 1 || birthDate.getDate() !== day) { alert(translations[currentLang].error); return; }
             var today = new Date();
             if (birthDate > today) { alert(translations[currentLang].error); return; }
-            var diffMs = today - birthDate;
-            var totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-            var totalHours = Math.floor(diffMs / (1000 * 60 * 60));
-            var totalMinutes = Math.floor(diffMs / (1000 * 60));
             var years = today.getFullYear() - birthDate.getFullYear();
             var months = today.getMonth() - birthDate.getMonth();
             var days = today.getDate() - birthDate.getDate();
             if (days < 0) { months--; days += new Date(today.getFullYear(), today.getMonth(), 0).getDate(); }
             if (months < 0) { years--; months += 12; }
-            var zodiac = getZodiac(month, day);
-            var text = translations[currentLang].result + '\n' + years + ' ' + translations[currentLang].years + '\n' + months + ' ' + translations[currentLang].months + '\n' + days + ' ' + translations[currentLang].days + '\n\n' + translations[currentLang].hours + ': ' + totalHours + '\n' + translations[currentLang].minutes + ': ' + totalMinutes + '\n\n' + translations[currentLang].zodiac + '\n' + zodiac;
+            var text = translations[currentLang].result + '\n\n' + years + ' ' + translations[currentLang].years + '\n' + months + ' ' + translations[currentLang].months + '\n' + days + ' ' + translations[currentLang].days;
             document.getElementById('ageResult').innerText = text;
             document.getElementById('result').classList.add('show');
         }

@@ -2,17 +2,13 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <script src="../tools-settings.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calorie Calculator | حاسبة السعرات الحرارية</title>
     <meta name="description" content="Calculate your daily calorie needs based on your weight, height, age, gender and activity level.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            min-height: 100vh; line-height: 1.7; color: white;
-            display: flex; justify-content: center; align-items: center; padding: 20px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); min-height: 100vh; line-height: 1.7; color: white; display: flex; justify-content: center; align-items: center; padding: 20px; }
         .container { width: 100%; max-width: 550px; }
         .glass-header { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
         .glass-header .icon { font-size: 3em; margin-bottom: 10px; animation: bounce 2s infinite; }
@@ -22,10 +18,10 @@
         .input-group { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
         .input-group div { flex: 1; min-width: 100px; text-align: center; }
         .input-group label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.85em; }
-        .input-group input, .input-group select { width: 100%; padding: 12px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.1em; background: rgba(255,255,255,0.9); color: #333; text-align: center; direction: ltr; }
-        .input-group input:focus, .input-group select:focus { outline: none; border-color: white; }
+        .input-group input, .input-group select { width: 100%; padding: 12px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.1em; background: rgba(255,255,255,0.15); color: white; text-align: center; direction: ltr; }
+        select option { background: rgba(255,255,255,0.9); color: #333; }
         button { width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; }
-        button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        button:hover { transform: translateY(-2px); }
         .result { background: rgba(255,255,255,0.95); color: #333; border-radius: 12px; padding: 25px; margin-top: 20px; text-align: center; display: none; animation: fadeIn 0.5s; }
         .result.show { display: block; }
         @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
@@ -48,12 +44,7 @@
         </header>
         <div class="tool-card">
             <div class="input-group">
-                <div><label data-i18n="gender">Gender</label>
-                    <select id="gender">
-                        <option value="male" data-i18n="male">Male</option>
-                        <option value="female" data-i18n="female">Female</option>
-                    </select>
-                </div>
+                <div><label data-i18n="gender">Gender</label><select id="gender"><option value="male" data-i18n="male">Male</option><option value="female" data-i18n="female">Female</option></select></div>
                 <div><label data-i18n="age">Age</label><input type="text" id="age" placeholder="25" maxlength="2"></div>
             </div>
             <div class="input-group">
@@ -61,31 +52,15 @@
                 <div><label data-i18n="height">Height (cm)</label><input type="text" id="height" placeholder="170" maxlength="3"></div>
             </div>
             <div class="input-group">
-                <div>
-                    <label data-i18n="activity">Activity Level</label>
-                    <select id="activity">
-                        <option value="1.2" data-i18n="sedentary">Sedentary</option>
-                        <option value="1.375" data-i18n="light">Light (1-3 days)</option>
-                        <option value="1.55" data-i18n="moderate" selected>Moderate (3-5 days)</option>
-                        <option value="1.725" data-i18n="active">Active (6-7 days)</option>
-                        <option value="1.9" data-i18n="veryActive">Very Active</option>
-                    </select>
-                </div>
-                <div>
-                    <label data-i18n="goal">Goal</label>
-                    <select id="goal">
-                        <option value="lose" data-i18n="lose">Lose Weight</option>
-                        <option value="maintain" data-i18n="maintain" selected>Maintain</option>
-                        <option value="gain" data-i18n="gain">Gain Weight</option>
-                    </select>
-                </div>
+                <div><label data-i18n="activity">Activity Level</label><select id="activity"><option value="1.2" data-i18n="sedentary">Sedentary</option><option value="1.375" data-i18n="light">Light</option><option value="1.55" data-i18n="moderate" selected>Moderate</option><option value="1.725" data-i18n="active">Active</option><option value="1.9" data-i18n="veryActive">Very Active</option></select></div>
+                <div><label data-i18n="goal">Goal</label><select id="goal"><option value="lose" data-i18n="lose">Lose</option><option value="maintain" data-i18n="maintain" selected>Maintain</option><option value="gain" data-i18n="gain">Gain</option></select></div>
             </div>
             <button onclick="calculateCalories()" data-i18n="btn">✨ Calculate Calories</button>
             <div class="result" id="result"><p id="calorieResult"></p></div>
         </div>
         <div class="info-card">
             <h3 data-i18n="aboutTitle">About Calorie Calculator</h3>
-            <p data-i18n="aboutText">This calculator estimates your daily calorie needs based on your age, gender, weight, height, activity level and goal.</p>
+            <p data-i18n="aboutText">Estimates your daily calorie needs based on your age, gender, weight, height, activity and goal.</p>
         </div>
         <div class="footer-text">
             <p data-i18n="footer">© 2026 My Digital Tools</p>
@@ -94,20 +69,13 @@
     </div>
     <script>
         var translations = {
-            en: { back:'← Back to Home', title:'Calorie Calculator', subtitle:'Know your daily calorie needs', gender:'Gender', male:'Male', female:'Female', age:'Age', weight:'Weight (kg)', height:'Height (cm)', activity:'Activity Level', sedentary:'Sedentary', light:'Light (1-3 days)', moderate:'Moderate (3-5 days)', active:'Active (6-7 days)', veryActive:'Very Active', goal:'Goal', lose:'Lose Weight', maintain:'Maintain', gain:'Gain Weight', btn:'✨ Calculate Calories', aboutTitle:'About Calorie Calculator', aboutText:'This calculator estimates your daily calorie needs based on your age, gender, weight, height, activity level and goal.', bmr:'Base Metabolic Rate:', dailyCalories:'Daily Calories:', goalCalories:'Goal Calories:', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter valid values' },
-            ar: { back:'← العودة للرئيسية', title:'حاسبة السعرات الحرارية', subtitle:'اعرف سعراتك اليومية', gender:'الجنس', male:'ذكر', female:'أنثى', age:'العمر', weight:'الوزن (كجم)', height:'الطول (سم)', activity:'مستوى النشاط', sedentary:'خامل', light:'خفيف (1-3 أيام)', moderate:'متوسط (3-5 أيام)', active:'نشيط (6-7 أيام)', veryActive:'نشيط جداً', goal:'الهدف', lose:'خسارة وزن', maintain:'ثبات وزن', gain:'زيادة وزن', btn:'✨ احسب السعرات', aboutTitle:'عن حاسبة السعرات', aboutText:'هذه الحاسبة تقدر احتياجك اليومي من السعرات بناءً على عمرك وجنسك ووزنك وطولك ومستوى نشاطك وهدفك.', bmr:'معدل الحرق الأساسي:', dailyCalories:'السعرات اليومية:', goalCalories:'سعرات الهدف:', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال قيم صحيحة' },
-            fr: { back:'← Retour', title:'Calculateur calories', subtitle:'Vos besoins quotidiens', gender:'Genre', male:'Homme', female:'Femme', age:'Âge', weight:'Poids (kg)', height:'Taille (cm)', activity:'Activité', sedentary:'Sédentaire', light:'Léger', moderate:'Modéré', active:'Actif', veryActive:'Très actif', goal:'Objectif', lose:'Perdre', maintain:'Maintenir', gain:'Gagner', btn:'✨ Calculer', aboutTitle:'À propos', aboutText:'Ce calculateur estime vos besoins quotidiens en calories.', bmr:'Métabolisme de base:', dailyCalories:'Calories/jour:', goalCalories:'Calories objectif:', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez des valeurs valides' },
-            tr: { back:'← Geri', title:'Kalori Hesaplama', subtitle:'Günlük kalori ihtiyacınız', gender:'Cinsiyet', male:'Erkek', female:'Kadın', age:'Yaş', weight:'Kilo (kg)', height:'Boy (cm)', activity:'Aktivite', sedentary:'Hareketsiz', light:'Hafif', moderate:'Orta', active:'Aktif', veryActive:'Çok Aktif', goal:'Hedef', lose:'Kilo Ver', maintain:'Koru', gain:'Kilo Al', btn:'✨ Hesapla', aboutTitle:'Hakkında', aboutText:'Bu hesaplayıcı günlük kalori ihtiyacınızı tahmin eder.', bmr:'Bazal Metabolizma:', dailyCalories:'Günlük Kalori:', goalCalories:'Hedef Kalori:', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli değerler girin' }
+            en: { back:'← Back to Home', title:'Calorie Calculator', subtitle:'Daily calorie needs', gender:'Gender', male:'Male', female:'Female', age:'Age', weight:'Weight (kg)', height:'Height (cm)', activity:'Activity', sedentary:'Sedentary', light:'Light', moderate:'Moderate', active:'Active', veryActive:'Very Active', goal:'Goal', lose:'Lose', maintain:'Maintain', gain:'Gain', btn:'✨ Calculate', aboutTitle:'About Calorie Calculator', aboutText:'Estimates your daily calorie needs.', bmr:'Base Metabolic Rate:', dailyCalories:'Daily Calories:', goalCalories:'Goal Calories:', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter valid values' },
+            ar: { back:'← العودة للرئيسية', title:'حاسبة السعرات', subtitle:'سعراتك اليومية', gender:'الجنس', male:'ذكر', female:'أنثى', age:'العمر', weight:'الوزن (كجم)', height:'الطول (سم)', activity:'النشاط', sedentary:'خامل', light:'خفيف', moderate:'متوسط', active:'نشيط', veryActive:'نشيط جداً', goal:'الهدف', lose:'خسارة', maintain:'ثبات', gain:'زيادة', btn:'✨ احسب', aboutTitle:'عن الحاسبة', aboutText:'تقدر احتياجك اليومي من السعرات.', bmr:'معدل الحرق:', dailyCalories:'السعرات اليومية:', goalCalories:'سعرات الهدف:', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال قيم صحيحة' },
+            fr: { back:'← Retour', title:'Calculateur calories', subtitle:'Besoin quotidien', gender:'Genre', male:'Homme', female:'Femme', age:'Âge', weight:'Poids (kg)', height:'Taille (cm)', activity:'Activité', sedentary:'Sédentaire', light:'Léger', moderate:'Modéré', active:'Actif', veryActive:'Très actif', goal:'Objectif', lose:'Perdre', maintain:'Maintenir', gain:'Gagner', btn:'✨ Calculer', aboutTitle:'À propos', aboutText:'Estime vos besoins quotidiens en calories.', bmr:'Métabolisme:', dailyCalories:'Calories/jour:', goalCalories:'Objectif:', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez des valeurs valides' },
+            tr: { back:'← Geri', title:'Kalori Hesaplama', subtitle:'Günlük ihtiyaç', gender:'Cinsiyet', male:'Erkek', female:'Kadın', age:'Yaş', weight:'Kilo (kg)', height:'Boy (cm)', activity:'Aktivite', sedentary:'Hareketsiz', light:'Hafif', moderate:'Orta', active:'Aktif', veryActive:'Çok Aktif', goal:'Hedef', lose:'Ver', maintain:'Koru', gain:'Al', btn:'✨ Hesapla', aboutTitle:'Hakkında', aboutText:'Günlük kalori ihtiyacınızı tahmin eder.', bmr:'Bazal Metabolizma:', dailyCalories:'Günlük Kalori:', goalCalories:'Hedef Kalori:', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli değerler girin' }
         };
         var currentLang = localStorage.getItem('lang') || 'en';
-        function applyLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(function(el) {
-                var key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
-            });
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-        }
+        function applyLang(lang) { currentLang = lang; document.querySelectorAll('[data-i18n]').forEach(function(el) { var key = el.getAttribute('data-i18n'); if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key]; }); document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr'; }
         function calculateCalories() {
             var w = document.getElementById('weight').value.trim();
             var h = document.getElementById('height').value.trim();

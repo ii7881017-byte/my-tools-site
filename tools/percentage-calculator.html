@@ -2,17 +2,13 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <script src="../tools-settings.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Percentage Calculator | حاسبة النسبة المئوية</title>
-    <meta name="description" content="Calculate percentages, increase, decrease and ratio between numbers.">
+    <meta name="description" content="Calculate percentages, ratios between numbers.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            min-height: 100vh; line-height: 1.7; color: white;
-            display: flex; justify-content: center; align-items: center; padding: 20px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); min-height: 100vh; line-height: 1.7; color: white; display: flex; justify-content: center; align-items: center; padding: 20px; }
         .container { width: 100%; max-width: 550px; }
         .glass-header { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
         .glass-header .icon { font-size: 3em; margin-bottom: 10px; animation: bounce 2s infinite; }
@@ -21,10 +17,8 @@
         .tool-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); margin-bottom: 25px; }
         label { display: block; font-weight: bold; margin-bottom: 8px; text-align: center; }
         input { width: 100%; padding: 15px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.1em; background: rgba(255,255,255,0.15); color: white; text-align: center; direction: ltr; margin-bottom: 15px; }
-        input:focus { outline: none; border-color: white; box-shadow: 0 0 20px rgba(255,255,255,0.4); }
-        input::placeholder { color: rgba(255,255,255,0.7); }
         button { width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        button:hover { transform: translateY(-2px); }
         .result { background: rgba(255,255,255,0.95); color: #333; border-radius: 12px; padding: 25px; margin-top: 20px; text-align: center; display: none; animation: fadeIn 0.5s; }
         .result.show { display: block; }
         @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
@@ -43,7 +37,7 @@
         <header class="glass-header">
             <div class="icon">💯</div>
             <h1 data-i18n="title">Percentage Calculator</h1>
-            <p data-i18n="subtitle">3 functions in one tool</p>
+            <p data-i18n="subtitle">2 functions in one</p>
         </header>
         <div class="tool-card">
             <label data-i18n="mode1">1️⃣ What is X% of Y?</label>
@@ -51,9 +45,7 @@
             <input type="text" id="numberVal" placeholder="200" maxlength="10">
             <button onclick="calcPercent()" data-i18n="calc1">Calculate Percentage</button>
             <div class="result" id="result1"><p id="result1Text"></p></div>
-            
             <hr style="margin: 25px 0; border-color: rgba(255,255,255,0.3);">
-            
             <label data-i18n="mode2">2️⃣ What % is A of B?</label>
             <input type="text" id="partVal" placeholder="50" maxlength="10">
             <input type="text" id="wholeVal" placeholder="200" maxlength="10">
@@ -62,7 +54,7 @@
         </div>
         <div class="info-card">
             <h3 data-i18n="aboutTitle">About Percentage Calculator</h3>
-            <p data-i18n="aboutText">Free percentage calculator with 2 modes: calculate X% of a number, and find what percentage one number is of another.</p>
+            <p data-i18n="aboutText">Free percentage calculator with 2 modes.</p>
         </div>
         <div class="footer-text">
             <p data-i18n="footer">© 2026 My Digital Tools</p>
@@ -71,25 +63,14 @@
     </div>
     <script>
         var translations = {
-            en: { back:'← Back to Home', title:'Percentage Calculator', subtitle:'3 functions in one', mode1:'1️⃣ What is X% of Y?', calc1:'Calculate Percentage', mode2:'2️⃣ What % is A of B?', calc2:'Calculate Ratio', aboutTitle:'About Percentage Calculator', aboutText:'Free percentage calculator with 2 modes: calculate X% of a number, and find what percentage one number is of another.', result1:'📊 Result:', result2:'📊 Ratio:', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter valid numbers' },
-            ar: { back:'← العودة للرئيسية', title:'حاسبة النسبة المئوية', subtitle:'وظيفتان في أداة واحدة', mode1:'1️⃣ كم يساوي X% من Y؟', calc1:'احسب النسبة', mode2:'2️⃣ كم نسبة A من B؟', calc2:'احسب النسبة', aboutTitle:'عن الحاسبة', aboutText:'حاسبة نسبة مئوية مجانية بوضعين: حساب نسبة من رقم، ومعرفة نسبة رقم من رقم آخر.', result1:'📊 النتيجة:', result2:'📊 النسبة:', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال أرقام صحيحة' },
-            fr: { back:'← Retour', title:'Calculateur %', subtitle:'2 fonctions', mode1:'1️⃣ X% de Y ?', calc1:'Calculer', mode2:'2️⃣ A est quel % de B ?', calc2:'Calculer', aboutTitle:'À propos', aboutText:'Calculateur de pourcentage gratuit avec 2 modes.', result1:'📊 Résultat:', result2:'📊 Ratio:', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez des nombres valides' },
-            tr: { back:'← Geri', title:'Yüzde Hesaplama', subtitle:'2 fonksiyon', mode1:'1️⃣ Y\'nin %X\'i nedir?', calc1:'Hesapla', mode2:'2️⃣ A, B\'nin % kaçı?', calc2:'Hesapla', aboutTitle:'Hakkında', aboutText:'2 modlu ücretsiz yüzde hesaplayıcı.', result1:'📊 Sonuç:', result2:'📊 Oran:', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli sayılar girin' }
+            en: { back:'← Back to Home', title:'Percentage Calculator', subtitle:'2 functions', mode1:'1️⃣ What is X% of Y?', calc1:'Calculate Percentage', mode2:'2️⃣ What % is A of B?', calc2:'Calculate Ratio', aboutTitle:'About Percentage Calculator', aboutText:'Free percentage calculator with 2 modes.', result1:'📊 Result:', result2:'📊 Ratio:', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter valid numbers' },
+            ar: { back:'← العودة للرئيسية', title:'حاسبة النسبة', subtitle:'وظيفتان', mode1:'1️⃣ كم X% من Y؟', calc1:'احسب النسبة', mode2:'2️⃣ كم نسبة A من B؟', calc2:'احسب النسبة', aboutTitle:'عن الحاسبة', aboutText:'حاسبة نسبة مجانية بوضعين.', result1:'📊 النتيجة:', result2:'📊 النسبة:', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال أرقام صحيحة' },
+            fr: { back:'← Retour', title:'Calculateur %', subtitle:'2 fonctions', mode1:'1️⃣ X% de Y ?', calc1:'Calculer', mode2:'2️⃣ A est quel % de B ?', calc2:'Calculer', aboutTitle:'À propos', aboutText:'Calculateur gratuit avec 2 modes.', result1:'📊 Résultat:', result2:'📊 Ratio:', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez des nombres valides' },
+            tr: { back:'← Geri', title:'Yüzde Hesaplama', subtitle:'2 fonksiyon', mode1:'1️⃣ Y\'nin %X\'i?', calc1:'Hesapla', mode2:'2️⃣ A, B\'nin % kaçı?', calc2:'Hesapla', aboutTitle:'Hakkında', aboutText:'2 modlu ücretsiz yüzde hesaplayıcı.', result1:'📊 Sonuç:', result2:'📊 Oran:', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli sayılar girin' }
         };
         var currentLang = localStorage.getItem('lang') || 'en';
-        function applyLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(function(el) {
-                var key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
-            });
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-        }
-        function toEnglish(input) {
-            var arabic = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-            for (var i = 0; i < 10; i++) input = input.replace(new RegExp(arabic[i], 'g'), i);
-            return input;
-        }
+        function applyLang(lang) { currentLang = lang; document.querySelectorAll('[data-i18n]').forEach(function(el) { var key = el.getAttribute('data-i18n'); if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key]; }); document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr'; }
+        function toEnglish(input) { var arabic = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩']; for (var i = 0; i < 10; i++) input = input.replace(new RegExp(arabic[i], 'g'), i); return input; }
         function calcPercent() {
             var p = parseFloat(toEnglish(document.getElementById('percentVal').value.trim()));
             var n = parseFloat(toEnglish(document.getElementById('numberVal').value.trim()));

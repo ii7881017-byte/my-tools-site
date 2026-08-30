@@ -2,24 +2,19 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <script src="tools-settings.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | اتصل بنا</title>
     <meta name="description" content="Contact My Digital Tools for any questions or suggestions.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            min-height: 100vh; line-height: 1.7; color: white;
-            display: flex; justify-content: center; align-items: center; padding: 20px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); min-height: 100vh; line-height: 1.7; color: white; display: flex; justify-content: center; align-items: center; padding: 20px; }
         .container { width: 100%; max-width: 650px; }
         .glass-header { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
         .glass-header .icon { font-size: 3em; margin-bottom: 10px; }
         .glass-header h1 { font-size: 1.8em; margin-bottom: 5px; }
         .glass-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); margin-bottom: 25px; text-align: center; }
         .glass-card h2 { margin-bottom: 15px; }
-        .glass-card p { opacity: 0.95; font-size: 0.95em; margin-bottom: 15px; }
         .contact-box { background: rgba(255,255,255,0.9); color: #333; border-radius: 12px; padding: 20px; margin: 15px 0; }
         .contact-box h3 { color: #667eea; margin-bottom: 5px; }
         .back-link { display: inline-block; margin-bottom: 20px; color: white; text-decoration: none; font-weight: bold; padding: 10px 20px; background: rgba(255,255,255,0.2); border-radius: 50px; }
@@ -37,7 +32,7 @@
         </header>
         <div class="glass-card">
             <h2 data-i18n="h2">Get in Touch</h2>
-            <p data-i18n="p1">If you have any questions, suggestions, or encounter any issues, feel free to contact us.</p>
+            <p data-i18n="p1">If you have any questions, suggestions, or issues, feel free to contact us.</p>
             <div class="contact-box">
                 <h3 data-i18n="emailLabel">📧 Email</h3>
                 <p>contact@digitaltools-ar.com</p>
@@ -54,21 +49,13 @@
     </div>
     <script>
         var translations = {
-            en: { back:'← Back to Home', title:'Contact Us', subtitle:'We are here to help', h2:'Get in Touch', p1:'If you have any questions, suggestions, or encounter any issues, feel free to contact us.', emailLabel:'📧 Email', responseLabel:'⏰ Response Time', response:'We usually reply within 24-48 hours', footer:'© 2026 My Digital Tools', privacy:'Privacy', about:'About' },
-            ar: { back:'← العودة للرئيسية', title:'اتصل بنا', subtitle:'نحن هنا لمساعدتك', h2:'تواصل معنا', p1:'إذا كان لديك أي أسئلة أو اقتراحات أو واجهت أي مشكلة، لا تتردد في التواصل معنا.', emailLabel:'📧 البريد الإلكتروني', responseLabel:'⏰ وقت الاستجابة', response:'نرد عادة خلال 24-48 ساعة', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', about:'من نحن' },
-            fr: { back:'← Retour', title:'Contact', subtitle:'Nous sommes là pour aider', h2:'Contactez-nous', p1:'Si vous avez des questions, suggestions ou problèmes, n\'hésitez pas à nous contacter.', emailLabel:'📧 Email', responseLabel:'⏰ Temps de réponse', response:'Nous répondons généralement sous 24-48 heures', footer:'© 2026 Mes Outils', privacy:'Confidentialité', about:'À propos' },
-            tr: { back:'← Geri', title:'İletişim', subtitle:'Yardım için buradayız', h2:'Bize Ulaşın', p1:'Sorularınız, önerileriniz veya sorunlarınız varsa bizimle iletişime geçmekten çekinmeyin.', emailLabel:'📧 E-posta', responseLabel:'⏰ Yanıt Süresi', response:'Genellikle 24-48 saat içinde yanıt veririz', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', about:'Hakkında' }
+            en: { back:'← Back to Home', title:'Contact Us', subtitle:'We are here to help', h2:'Get in Touch', p1:'If you have any questions, suggestions, or issues, feel free to contact us.', emailLabel:'📧 Email', responseLabel:'⏰ Response Time', response:'We usually reply within 24-48 hours', footer:'© 2026 My Digital Tools', privacy:'Privacy', about:'About' },
+            ar: { back:'← العودة للرئيسية', title:'اتصل بنا', subtitle:'نحن هنا لمساعدتك', h2:'تواصل معنا', p1:'إذا كان لديك أي أسئلة أو اقتراحات، تواصل معنا.', emailLabel:'📧 البريد الإلكتروني', responseLabel:'⏰ وقت الاستجابة', response:'نرد عادة خلال 24-48 ساعة', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', about:'من نحن' },
+            fr: { back:'← Retour', title:'Contact', subtitle:'Nous sommes là', h2:'Contactez-nous', p1:'Pour toute question, contactez-nous.', emailLabel:'📧 Email', responseLabel:'⏰ Réponse', response:'Nous répondons sous 24-48h', footer:'© 2026 Mes Outils', privacy:'Confidentialité', about:'À propos' },
+            tr: { back:'← Geri', title:'İletişim', subtitle:'Yardım için buradayız', h2:'Bize Ulaşın', p1:'Sorularınız için bize ulaşın.', emailLabel:'📧 E-posta', responseLabel:'⏰ Yanıt', response:'24-48 saat içinde yanıt veririz', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', about:'Hakkında' }
         };
         var currentLang = localStorage.getItem('lang') || 'en';
-        function applyLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(function(el) {
-                var key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
-            });
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-            document.documentElement.lang = lang;
-        }
+        function applyLang(lang) { currentLang = lang; document.querySelectorAll('[data-i18n]').forEach(function(el) { var key = el.getAttribute('data-i18n'); if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key]; }); document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr'; }
         applyLang(currentLang);
     </script>
 </body>

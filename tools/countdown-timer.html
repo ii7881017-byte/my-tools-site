@@ -2,17 +2,13 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <script src="../tools-settings.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countdown Timer | مؤقت العد التنازلي</title>
     <meta name="description" content="Set a countdown timer easily.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            min-height: 100vh; line-height: 1.7; color: white;
-            display: flex; justify-content: center; align-items: center; padding: 20px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); min-height: 100vh; line-height: 1.7; color: white; display: flex; justify-content: center; align-items: center; padding: 20px; }
         .container { width: 100%; max-width: 550px; }
         .glass-header { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
         .glass-header .icon { font-size: 3em; margin-bottom: 10px; animation: bounce 2s infinite; }
@@ -20,7 +16,7 @@
         .glass-header h1 { font-size: 1.8em; margin-bottom: 5px; }
         .tool-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); margin-bottom: 25px; text-align: center; }
         label { display: block; font-weight: bold; margin-bottom: 8px; }
-        input { width: 100%; padding: 15px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.2em; background: rgba(255,255,255,0.9); color: #333; text-align: center; direction: ltr; margin-bottom: 15px; }
+        input { width: 100%; padding: 15px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.2em; background: rgba(255,255,255,0.15); color: white; text-align: center; direction: ltr; margin-bottom: 15px; }
         button { width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; margin-bottom: 10px; }
         button:hover { transform: translateY(-2px); }
         .timer-display { font-size: 3em; font-weight: bold; font-family: monospace; margin: 20px 0; display: none; }
@@ -39,7 +35,7 @@
         <header class="glass-header">
             <div class="icon">⏱️</div>
             <h1 data-i18n="title">Countdown Timer</h1>
-            <p data-i18n="subtitle">Set a countdown timer easily</p>
+            <p data-i18n="subtitle">Set a timer easily</p>
         </header>
         <div class="tool-card">
             <label data-i18n="minutes">Minutes:</label>
@@ -61,19 +57,12 @@
         var translations = {
             en: { back:'← Back to Home', title:'Countdown Timer', subtitle:'Set a timer easily', minutes:'Minutes:', startBtn:'▶ Start', stopBtn:'■ Stop', aboutTitle:'About Countdown Timer', aboutText:'Free countdown timer to help you manage your time.', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter valid minutes', done:'⏰ Time is up!' },
             ar: { back:'← العودة للرئيسية', title:'مؤقت العد التنازلي', subtitle:'اضبط مؤقتاً بسهولة', minutes:'الدقائق:', startBtn:'▶ ابدأ', stopBtn:'■ إيقاف', aboutTitle:'عن المؤقت', aboutText:'مؤقت عد تنازلي مجاني لمساعدتك على إدارة وقتك.', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال دقائق صحيحة', done:'⏰ انتهى الوقت!' },
-            fr: { back:'← Retour', title:'Minuterie', subtitle:'Réglez un minuteur', minutes:'Minutes:', startBtn:'▶ Démarrer', stopBtn:'■ Arrêter', aboutTitle:'À propos', aboutText:'Minuterie gratuite pour vous aider à gérer votre temps.', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez des minutes valides', done:'⏰ Temps écoulé!' },
-            tr: { back:'← Geri', title:'Geri Sayım', subtitle:'Sayaç ayarlayın', minutes:'Dakika:', startBtn:'▶ Başlat', stopBtn:'■ Durdur', aboutTitle:'Hakkında', aboutText:'Zamanınızı yönetmenize yardımcı olacak ücretsiz geri sayım sayacı.', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli dakika girin', done:'⏰ Süre doldu!' }
+            fr: { back:'← Retour', title:'Minuterie', subtitle:'Réglez un minuteur', minutes:'Minutes:', startBtn:'▶ Démarrer', stopBtn:'■ Arrêter', aboutTitle:'À propos', aboutText:'Minuterie gratuite pour gérer votre temps.', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez des minutes valides', done:'⏰ Temps écoulé!' },
+            tr: { back:'← Geri', title:'Geri Sayım', subtitle:'Sayaç ayarlayın', minutes:'Dakika:', startBtn:'▶ Başlat', stopBtn:'■ Durdur', aboutTitle:'Hakkında', aboutText:'Zamanınızı yönetmek için ücretsiz geri sayım.', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli dakika girin', done:'⏰ Süre doldu!' }
         };
         var currentLang = localStorage.getItem('lang') || 'en';
         var timerInterval;
-        function applyLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(function(el) {
-                var key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
-            });
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-        }
+        function applyLang(lang) { currentLang = lang; document.querySelectorAll('[data-i18n]').forEach(function(el) { var key = el.getAttribute('data-i18n'); if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key]; }); document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr'; }
         function startTimer() {
             var input = document.getElementById('minutes').value.trim();
             var arabic = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];

@@ -2,17 +2,13 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <script src="../tools-settings.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discount Calculator | حاسبة الخصم</title>
     <meta name="description" content="Calculate discounts and know how much you save.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            min-height: 100vh; line-height: 1.7; color: white;
-            display: flex; justify-content: center; align-items: center; padding: 20px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); min-height: 100vh; line-height: 1.7; color: white; display: flex; justify-content: center; align-items: center; padding: 20px; }
         .container { width: 100%; max-width: 550px; }
         .glass-header { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
         .glass-header .icon { font-size: 3em; margin-bottom: 10px; animation: bounce 2s infinite; }
@@ -22,10 +18,10 @@
         .input-group { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
         .input-group div { flex: 1; min-width: 120px; text-align: center; }
         .input-group label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.9em; }
-        .input-group input { width: 100%; padding: 15px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.1em; background: rgba(255,255,255,0.9); color: #333; text-align: center; direction: ltr; }
+        .input-group input { width: 100%; padding: 15px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.1em; background: rgba(255,255,255,0.15); color: white; text-align: center; direction: ltr; }
         .input-group input:focus { outline: none; border-color: white; }
         button { width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; margin-top: 15px; }
-        button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        button:hover { transform: translateY(-2px); }
         .result { background: rgba(255,255,255,0.95); color: #333; border-radius: 12px; padding: 25px; margin-top: 20px; text-align: center; display: none; animation: fadeIn 0.5s; }
         .result.show { display: block; }
         @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
@@ -65,20 +61,13 @@
     </div>
     <script>
         var translations = {
-            en: { back:'← Back to Home', title:'Discount Calculator', subtitle:'Calculate discounts', price:'Original Price', discount:'Discount %', btn:'✨ Calculate', aboutTitle:'About Discount Calculator', aboutText:'Free discount calculator to find out how much you save on sales.', originalPrice:'Original Price:', discountAmount:'Discount Amount:', finalPrice:'Final Price:', savings:'You Save:', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter valid values' },
-            ar: { back:'← العودة للرئيسية', title:'حاسبة الخصم', subtitle:'احسب التخفيضات', price:'السعر الأصلي', discount:'نسبة الخصم %', btn:'✨ احسب', aboutTitle:'عن حاسبة الخصم', aboutText:'حاسبة خصم مجانية لمعرفة كم ستوفر في التخفيضات.', originalPrice:'السعر الأصلي:', discountAmount:'قيمة الخصم:', finalPrice:'السعر النهائي:', savings:'أنت توفر:', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال قيم صحيحة' },
+            en: { back:'← Back to Home', title:'Discount Calculator', subtitle:'Calculate discounts', price:'Original Price', discount:'Discount %', btn:'✨ Calculate', aboutTitle:'About Discount Calculator', aboutText:'Free discount calculator to find out how much you save.', originalPrice:'Original Price:', discountAmount:'Discount Amount:', finalPrice:'Final Price:', savings:'You Save:', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter valid values' },
+            ar: { back:'← العودة للرئيسية', title:'حاسبة الخصم', subtitle:'احسب التخفيضات', price:'السعر الأصلي', discount:'نسبة الخصم %', btn:'✨ احسب', aboutTitle:'عن حاسبة الخصم', aboutText:'حاسبة خصم مجانية لمعرفة كم ستوفر.', originalPrice:'السعر الأصلي:', discountAmount:'قيمة الخصم:', finalPrice:'السعر النهائي:', savings:'أنت توفر:', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال قيم صحيحة' },
             fr: { back:'← Retour', title:'Calculateur réduction', subtitle:'Calculez vos réductions', price:'Prix original', discount:'Réduction %', btn:'✨ Calculer', aboutTitle:'À propos', aboutText:'Calculateur gratuit pour savoir combien vous économisez.', originalPrice:'Prix original:', discountAmount:'Montant réduction:', finalPrice:'Prix final:', savings:'Vous économisez:', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez des valeurs valides' },
             tr: { back:'← Geri', title:'İndirim Hesaplama', subtitle:'İndirimleri hesaplayın', price:'Orijinal Fiyat', discount:'İndirim %', btn:'✨ Hesapla', aboutTitle:'Hakkında', aboutText:'İndirimlerde ne kadar tasarruf ettiğinizi öğrenin.', originalPrice:'Orijinal Fiyat:', discountAmount:'İndirim Tutarı:', finalPrice:'Son Fiyat:', savings:'Tasarruf:', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli değerler girin' }
         };
         var currentLang = localStorage.getItem('lang') || 'en';
-        function applyLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(function(el) {
-                var key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
-            });
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-        }
+        function applyLang(lang) { currentLang = lang; document.querySelectorAll('[data-i18n]').forEach(function(el) { var key = el.getAttribute('data-i18n'); if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key]; }); document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr'; }
         function calculateDiscount() {
             var p = document.getElementById('price').value.trim();
             var d = document.getElementById('discount').value.trim();

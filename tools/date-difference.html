@@ -2,17 +2,13 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <script src="../tools-settings.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Date Difference | حساب المدة بين تاريخين</title>
     <meta name="description" content="Calculate days between two dates easily.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            min-height: 100vh; line-height: 1.7; color: white;
-            display: flex; justify-content: center; align-items: center; padding: 20px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); min-height: 100vh; line-height: 1.7; color: white; display: flex; justify-content: center; align-items: center; padding: 20px; }
         .container { width: 100%; max-width: 550px; }
         .glass-header { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
         .glass-header .icon { font-size: 3em; margin-bottom: 10px; animation: bounce 2s infinite; }
@@ -22,10 +18,10 @@
         .input-group { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
         .input-group div { flex: 1; min-width: 120px; text-align: center; }
         .input-group label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.9em; }
-        input { width: 100%; padding: 12px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1em; background: rgba(255,255,255,0.9); color: #333; text-align: center; direction: ltr; }
+        input { width: 100%; padding: 12px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1em; background: rgba(255,255,255,0.15); color: white; text-align: center; direction: ltr; }
         input:focus { outline: none; border-color: white; }
         button { width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; margin-top: 15px; }
-        button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        button:hover { transform: translateY(-2px); }
         .result { background: rgba(255,255,255,0.95); color: #333; border-radius: 12px; padding: 25px; margin-top: 20px; text-align: center; display: none; animation: fadeIn 0.5s; }
         .result.show { display: block; }
         @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
@@ -44,7 +40,7 @@
         <header class="glass-header">
             <div class="icon">📅</div>
             <h1 data-i18n="title">Date Difference</h1>
-            <p data-i18n="subtitle">Calculate days between two dates</p>
+            <p data-i18n="subtitle">Days between two dates</p>
         </header>
         <div class="tool-card">
             <div class="input-group">
@@ -65,20 +61,13 @@
     </div>
     <script>
         var translations = {
-            en: { back:'← Back to Home', title:'Date Difference', subtitle:'Days between two dates', startDate:'Start Date', endDate:'End Date', btn:'✨ Calculate', aboutTitle:'About Date Difference', aboutText:'Free tool to calculate the number of days between two dates.', days:'Days', weeks:'Weeks', months:'Months (approx)', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter valid dates (YYYY-MM-DD)' },
-            ar: { back:'← العودة للرئيسية', title:'حساب المدة بين تاريخين', subtitle:'احسب الأيام بين تاريخين', startDate:'التاريخ الأول', endDate:'التاريخ الثاني', btn:'✨ احسب', aboutTitle:'عن حساب المدة', aboutText:'أداة مجانية لحساب عدد الأيام بين تاريخين.', days:'يوم', weeks:'أسبوع', months:'شهر (تقريباً)', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال تواريخ صحيحة (سنة-شهر-يوم)' },
-            fr: { back:'← Retour', title:'Différence de dates', subtitle:'Jours entre deux dates', startDate:'Date début', endDate:'Date fin', btn:'✨ Calculer', aboutTitle:'À propos', aboutText:'Outil gratuit pour calculer le nombre de jours entre deux dates.', days:'Jours', weeks:'Semaines', months:'Mois (approx)', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez des dates valides' },
+            en: { back:'← Back to Home', title:'Date Difference', subtitle:'Days between dates', startDate:'Start Date', endDate:'End Date', btn:'✨ Calculate', aboutTitle:'About Date Difference', aboutText:'Free tool to calculate the number of days between two dates.', days:'Days', weeks:'Weeks', months:'Months (approx)', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter valid dates (YYYY-MM-DD)' },
+            ar: { back:'← العودة للرئيسية', title:'حساب المدة بين تاريخين', subtitle:'الأيام بين تاريخين', startDate:'التاريخ الأول', endDate:'التاريخ الثاني', btn:'✨ احسب', aboutTitle:'عن حساب المدة', aboutText:'أداة مجانية لحساب عدد الأيام بين تاريخين.', days:'يوم', weeks:'أسبوع', months:'شهر (تقريباً)', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال تواريخ صحيحة (سنة-شهر-يوم)' },
+            fr: { back:'← Retour', title:'Différence de dates', subtitle:'Jours entre dates', startDate:'Date début', endDate:'Date fin', btn:'✨ Calculer', aboutTitle:'À propos', aboutText:'Outil gratuit pour calculer le nombre de jours entre deux dates.', days:'Jours', weeks:'Semaines', months:'Mois (approx)', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez des dates valides' },
             tr: { back:'← Geri', title:'Tarih Farkı', subtitle:'İki tarih arası gün', startDate:'Başlangıç', endDate:'Bitiş', btn:'✨ Hesapla', aboutTitle:'Hakkında', aboutText:'İki tarih arasındaki gün sayısını hesaplamak için ücretsiz araç.', days:'Gün', weeks:'Hafta', months:'Ay (yaklaşık)', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli tarihler girin' }
         };
         var currentLang = localStorage.getItem('lang') || 'en';
-        function applyLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(function(el) {
-                var key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
-            });
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-        }
+        function applyLang(lang) { currentLang = lang; document.querySelectorAll('[data-i18n]').forEach(function(el) { var key = el.getAttribute('data-i18n'); if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key]; }); document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr'; }
         function calculateDiff() {
             var s = document.getElementById('startDate').value.trim();
             var e = document.getElementById('endDate').value.trim();

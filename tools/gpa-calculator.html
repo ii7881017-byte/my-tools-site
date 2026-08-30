@@ -2,28 +2,24 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <script src="../tools-settings.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GPA Calculator | حاسبة المعدل الجامعي</title>
     <meta name="description" content="Calculate your GPA easily with our free university grade calculator.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            min-height: 100vh; line-height: 1.7; color: white;
-            display: flex; justify-content: center; align-items: center; padding: 20px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); min-height: 100vh; line-height: 1.7; color: white; display: flex; justify-content: center; align-items: center; padding: 20px; }
         .container { width: 100%; max-width: 600px; }
         .glass-header { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
         .glass-header .icon { font-size: 3em; margin-bottom: 10px; animation: bounce 2s infinite; }
         @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
         .glass-header h1 { font-size: 1.8em; margin-bottom: 5px; }
         .tool-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); margin-bottom: 25px; }
-        label { display: block; font-weight: bold; margin-bottom: 8px; text-align: center; font-size: 1em; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; text-align: center; }
         select { width: 100%; padding: 12px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1em; background: rgba(255,255,255,0.15); color: white; text-align: center; direction: ltr; margin-bottom: 15px; }
         select option { background: rgba(255,255,255,0.9); color: #333; }
         button { width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        button:hover { transform: translateY(-2px); }
         .result { background: rgba(255,255,255,0.95); color: #333; border-radius: 12px; padding: 25px; margin-top: 20px; text-align: center; display: none; animation: fadeIn 0.5s; }
         .result.show { display: block; }
         @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
@@ -47,12 +43,7 @@
         <div class="tool-card">
             <label data-i18n="courses">How many courses?</label>
             <select id="courseCount" onchange="buildCourses()">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3" selected>3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
+                <option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option>
             </select>
             <div id="coursesContainer"></div>
             <button onclick="calculateGPA()" data-i18n="btn">✨ Calculate GPA</button>
@@ -60,7 +51,7 @@
         </div>
         <div class="info-card">
             <h3 data-i18n="aboutTitle">About GPA Calculator</h3>
-            <p data-i18n="aboutText">Calculate your GPA easily. Select your grades and credits for each course to get your GPA instantly.</p>
+            <p data-i18n="aboutText">Calculate your GPA easily. Select your grades and credits for each course.</p>
         </div>
         <div class="footer-text">
             <p data-i18n="footer">© 2026 My Digital Tools</p>
@@ -69,31 +60,23 @@
     </div>
     <script>
         var translations = {
-            en: { back:'← Back to Home', title:'GPA Calculator', subtitle:'Calculate your university GPA', courses:'How many courses?', btn:'✨ Calculate GPA', aboutTitle:'About GPA Calculator', aboutText:'Calculate your GPA easily. Select your grades and credits for each course.', course:'Course', grade:'Grade', credits:'Credits', gpa:'Your GPA:', excellent:'Excellent!', good:'Very Good!', average:'Average', low:'Needs Improvement', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please select all courses' },
-            ar: { back:'← العودة للرئيسية', title:'حاسبة المعدل الجامعي', subtitle:'احسب معدلك الجامعي', courses:'كم عدد المواد؟', btn:'✨ احسب المعدل', aboutTitle:'عن الحاسبة', aboutText:'احسب معدلك الجامعي بسهولة. اختر درجاتك وساعات كل مادة.', course:'المادة', grade:'الدرجة', credits:'الساعات', gpa:'معدلك:', excellent:'ممتاز!', good:'جيد جداً!', average:'متوسط', low:'يحتاج تحسين', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء اختيار جميع المواد' },
-            fr: { back:'← Retour', title:'Calculateur GPA', subtitle:'Calculez votre moyenne', courses:'Nombre de cours?', btn:'✨ Calculer', aboutTitle:'À propos', aboutText:'Calculez votre moyenne facilement.', course:'Cours', grade:'Note', credits:'Crédits', gpa:'Votre GPA:', excellent:'Excellent!', good:'Très bien!', average:'Moyen', low:'À améliorer', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Remplissez tous les cours' },
-            tr: { back:'← Geri', title:'GPA Hesaplama', subtitle:'Üniversite ortalamanızı hesaplayın', courses:'Kaç ders?', btn:'✨ Hesapla', aboutTitle:'Hakkında', aboutText:'Ortalamanızı kolayca hesaplayın.', course:'Ders', grade:'Not', credits:'Kredi', gpa:'Ortalamanız:', excellent:'Mükemmel!', good:'Çok iyi!', average:'Orta', low:'Geliştirmeli', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Tüm dersleri seçin' }
+            en: { back:'← Back to Home', title:'GPA Calculator', subtitle:'University GPA', courses:'How many courses?', btn:'✨ Calculate GPA', aboutTitle:'About GPA Calculator', aboutText:'Calculate your GPA easily.', course:'Course', grade:'Grade', credits:'Credits', gpa:'Your GPA:', excellent:'Excellent!', good:'Very Good!', average:'Average', low:'Needs Improvement', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please select all courses' },
+            ar: { back:'← العودة للرئيسية', title:'حاسبة المعدل', subtitle:'معدلك الجامعي', courses:'كم عدد المواد؟', btn:'✨ احسب المعدل', aboutTitle:'عن الحاسبة', aboutText:'احسب معدلك بسهولة.', course:'المادة', grade:'الدرجة', credits:'الساعات', gpa:'معدلك:', excellent:'ممتاز!', good:'جيد جداً!', average:'متوسط', low:'يحتاج تحسين', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء اختيار جميع المواد' },
+            fr: { back:'← Retour', title:'Calculateur GPA', subtitle:'Moyenne universitaire', courses:'Nombre de cours?', btn:'✨ Calculer', aboutTitle:'À propos', aboutText:'Calculez votre moyenne facilement.', course:'Cours', grade:'Note', credits:'Crédits', gpa:'Votre GPA:', excellent:'Excellent!', good:'Très bien!', average:'Moyen', low:'À améliorer', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Remplissez tous les cours' },
+            tr: { back:'← Geri', title:'GPA Hesaplama', subtitle:'Üniversite ortalaması', courses:'Kaç ders?', btn:'✨ Hesapla', aboutTitle:'Hakkında', aboutText:'Ortalamanızı kolayca hesaplayın.', course:'Ders', grade:'Not', credits:'Kredi', gpa:'Ortalama:', excellent:'Mükemmel!', good:'Çok iyi!', average:'Orta', low:'Geliştirmeli', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Tüm dersleri seçin' }
         };
         var currentLang = localStorage.getItem('lang') || 'en';
-        function applyLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(function(el) {
-                var key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
-            });
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-        }
+        function applyLang(lang) { currentLang = lang; document.querySelectorAll('[data-i18n]').forEach(function(el) { var key = el.getAttribute('data-i18n'); if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key]; }); document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr'; }
         function buildCourses() {
             var count = parseInt(document.getElementById('courseCount').value);
             var container = document.getElementById('coursesContainer');
             container.innerHTML = '';
             for (var i = 1; i <= count; i++) {
-                var html = '<label>' + translations[currentLang].course + ' ' + i + '</label>' +
+                container.innerHTML += '<label>' + translations[currentLang].course + ' ' + i + '</label>' +
                     '<div style="display:flex;gap:10px;margin-bottom:15px;">' +
                     '<select id="grade' + i + '" style="flex:1;"><option value="4">A</option><option value="3">B</option><option value="2">C</option><option value="1">D</option><option value="0">F</option></select>' +
                     '<select id="credits' + i + '" style="flex:1;"><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="4">4</option></select>' +
                     '</div>';
-                container.innerHTML += html;
             }
         }
         function calculateGPA() {
@@ -103,10 +86,8 @@
                 var gradeEl = document.getElementById('grade' + i);
                 var creditsEl = document.getElementById('credits' + i);
                 if (!gradeEl || !creditsEl) continue;
-                var grade = parseFloat(gradeEl.value);
-                var credits = parseFloat(creditsEl.value);
-                totalPoints += grade * credits;
-                totalCredits += credits;
+                totalPoints += parseFloat(gradeEl.value) * parseFloat(creditsEl.value);
+                totalCredits += parseFloat(creditsEl.value);
             }
             if (totalCredits === 0) { alert(translations[currentLang].error); return; }
             var gpa = (totalPoints / totalCredits).toFixed(2);

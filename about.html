@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <script src="tools-settings.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | من نحن</title>
     <meta name="description" content="About My Digital Tools - free online tools for daily use.">
@@ -36,11 +37,11 @@
         </header>
         <div class="glass-card">
             <h2 data-i18n="welcome">Welcome to My Digital Tools</h2>
-            <p data-i18n="p1">My Digital Tools is a completely free website that provides useful and easy-to-use digital tools for everyone. We started this site with a simple idea: to offer digital services that people need daily without any complexity or cost.</p>
+            <p data-i18n="p1">My Digital Tools is a completely free website that provides useful and easy-to-use digital tools for everyone.</p>
             <h3 data-i18n="h2">What We Offer</h3>
-            <p data-i18n="p2">We provide a variety of digital tools such as age calculator, BMI calculator, word counter, unit converters, and more. All our tools work directly in your browser without any additional software or account registration.</p>
+            <p data-i18n="p2">We provide a variety of digital tools such as age calculator, BMI calculator, word counter, and more.</p>
             <h3 data-i18n="h3">Why Free?</h3>
-            <p data-i18n="p3">We believe that simple digital tools should be available to everyone for free. We rely on ads to cover operating costs while maintaining a great user experience.</p>
+            <p data-i18n="p3">We believe that simple digital tools should be available to everyone for free.</p>
         </div>
         <div class="footer-text">
             <p data-i18n="footer">© 2026 My Digital Tools</p>
@@ -49,21 +50,13 @@
     </div>
     <script>
         var translations = {
-            en: { back:'← Back to Home', title:'About Us', subtitle:'Learn more about us', welcome:'Welcome to My Digital Tools', p1:'My Digital Tools is a completely free website that provides useful and easy-to-use digital tools for everyone. We started this site with a simple idea: to offer digital services that people need daily without any complexity or cost.', h2:'What We Offer', p2:'We provide a variety of digital tools such as age calculator, BMI calculator, word counter, unit converters, and more. All our tools work directly in your browser without any additional software or account registration.', h3:'Why Free?', p3:'We believe that simple digital tools should be available to everyone for free. We rely on ads to cover operating costs while maintaining a great user experience.', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact' },
-            ar: { back:'← العودة للرئيسية', title:'من نحن', subtitle:'تعرف علينا أكثر', welcome:'مرحباً بكم في أدواتي الرقمية', p1:'أدواتي الرقمية موقع مجاني بالكامل يوفر أدوات رقمية مفيدة وسهلة الاستخدام للجميع. بدأنا هذا الموقع بفكرة بسيطة: تقديم خدمات رقمية يحتاجها الناس يومياً بدون أي تعقيد أو تكلفة.', h2:'ماذا نقدم', p2:'نوفر مجموعة متنوعة من الأدوات الرقمية مثل حاسبة العمر وحاسبة مؤشر كتلة الجسم وعداد الكلمات ومحولات الوحدات والمزيد. جميع أدواتنا تعمل مباشرة في متصفحك بدون أي برامج إضافية أو تسجيل حساب.', h3:'لماذا مجاني؟', p3:'نؤمن أن الأدوات الرقمية البسيطة يجب أن تكون متاحة للجميع مجاناً. نعتمد على الإعلانات لتغطية تكاليف التشغيل مع الحفاظ على تجربة مستخدم ممتازة.', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا' },
-            fr: { back:'← Retour', title:'À propos', subtitle:'En savoir plus sur nous', welcome:'Bienvenue sur Mes Outils Numériques', p1:'Mes Outils Numériques est un site entièrement gratuit qui fournit des outils numériques utiles et faciles à utiliser pour tous.', h2:'Ce que nous offrons', p2:'Nous proposons une variété d\'outils numériques tels que calculatrice d\'âge, IMC, compteur de mots, convertisseurs et plus encore.', h3:'Pourquoi gratuit ?', p3:'Nous croyons que les outils numériques simples doivent être disponibles gratuitement pour tous.', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact' },
-            tr: { back:'← Geri', title:'Hakkında', subtitle:'Hakkımızda bilgi edinin', welcome:'Dijital Araçlarıma Hoş Geldiniz', p1:'Dijital Araçlarım, herkes için kullanışlı ve kullanımı kolay dijital araçlar sağlayan tamamen ücretsiz bir sitedir.', h2:'Sunduklarımız', p2:'Yaş hesaplama, BMI, kelime sayacı, birim çeviriciler ve daha fazlası gibi çeşitli dijital araçlar sunuyoruz.', h3:'Neden Ücretsiz?', p3:'Basit dijital araçların herkes için ücretsiz olması gerektiğine inanıyoruz.', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim' }
+            en: { back:'← Back to Home', title:'About Us', subtitle:'Learn more about us', welcome:'Welcome to My Digital Tools', p1:'My Digital Tools is a completely free website that provides useful and easy-to-use digital tools for everyone.', h2:'What We Offer', p2:'We provide a variety of digital tools such as age calculator, BMI calculator, word counter, and more.', h3:'Why Free?', p3:'We believe that simple digital tools should be available to everyone for free.', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact' },
+            ar: { back:'← العودة للرئيسية', title:'من نحن', subtitle:'تعرف علينا', welcome:'مرحباً بكم في أدواتي الرقمية', p1:'أدواتي الرقمية موقع مجاني بالكامل يوفر أدوات رقمية مفيدة للجميع.', h2:'ماذا نقدم', p2:'نوفر مجموعة متنوعة من الأدوات الرقمية مثل حاسبة العمر ومؤشر كتلة الجسم وعداد الكلمات.', h3:'لماذا مجاني؟', p3:'نؤمن أن الأدوات الرقمية البسيطة يجب أن تكون متاحة للجميع مجاناً.', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا' },
+            fr: { back:'← Retour', title:'À propos', subtitle:'En savoir plus', welcome:'Bienvenue', p1:'Mes Outils Numériques est un site gratuit qui fournit des outils numériques utiles.', h2:'Ce que nous offrons', p2:'Nous proposons une variété d\'outils numériques.', h3:'Pourquoi gratuit ?', p3:'Nous croyons que les outils simples doivent être gratuits.', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact' },
+            tr: { back:'← Geri', title:'Hakkında', subtitle:'Bilgi edinin', welcome:'Hoş Geldiniz', p1:'Dijital Araçlarım ücretsiz bir sitedir.', h2:'Sunduklarımız', p2:'Çeşitli dijital araçlar sunuyoruz.', h3:'Neden Ücretsiz?', p3:'Basit araçların ücretsiz olması gerektiğine inanıyoruz.', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim' }
         };
         var currentLang = localStorage.getItem('lang') || 'en';
-        function applyLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(function(el) {
-                var key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
-            });
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-            document.documentElement.lang = lang;
-        }
+        function applyLang(lang) { currentLang = lang; document.querySelectorAll('[data-i18n]').forEach(function(el) { var key = el.getAttribute('data-i18n'); if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key]; }); document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr'; }
         applyLang(currentLang);
     </script>
 </body>

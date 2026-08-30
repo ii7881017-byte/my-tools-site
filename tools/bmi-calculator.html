@@ -2,17 +2,13 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <script src="../tools-settings.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMI Calculator | حاسبة الوزن المثالي المتقدمة</title>
+    <title>BMI Calculator | حاسبة الوزن المثالي</title>
     <meta name="description" content="Calculate your BMI, get health tips and daily calorie needs.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            min-height: 100vh; line-height: 1.7; color: white;
-            display: flex; justify-content: center; align-items: center; padding: 20px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); min-height: 100vh; line-height: 1.7; color: white; display: flex; justify-content: center; align-items: center; padding: 20px; }
         .container { width: 100%; max-width: 550px; }
         .glass-header { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
         .glass-header .icon { font-size: 3em; margin-bottom: 10px; animation: bounce 2s infinite; }
@@ -22,8 +18,9 @@
         .input-group { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
         .input-group div { flex: 1; min-width: 100px; text-align: center; }
         .input-group label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.85em; }
-        .input-group input, .input-group select { width: 100%; padding: 12px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.1em; background: rgba(255,255,255,0.9); color: #333; text-align: center; direction: ltr; }
+        .input-group input, .input-group select { width: 100%; padding: 12px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; font-size: 1.1em; background: rgba(255,255,255,0.15); color: white; text-align: center; direction: ltr; }
         .input-group input:focus, .input-group select:focus { outline: none; border-color: white; }
+        select option { background: rgba(255,255,255,0.9); color: #333; }
         button { width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; }
         button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         .result { background: rgba(255,255,255,0.95); color: #333; border-radius: 12px; padding: 25px; margin-top: 20px; text-align: center; display: none; animation: fadeIn 0.5s; }
@@ -53,13 +50,7 @@
                 <div><label data-i18n="age">Age</label><input type="text" id="age" placeholder="25" maxlength="2"></div>
             </div>
             <div class="input-group">
-                <div>
-                    <label data-i18n="gender">Gender</label>
-                    <select id="gender">
-                        <option value="male" data-i18n="male">Male</option>
-                        <option value="female" data-i18n="female">Female</option>
-                    </select>
-                </div>
+                <div><label data-i18n="gender">Gender</label><select id="gender"><option value="male" data-i18n="male">Male</option><option value="female" data-i18n="female">Female</option></select></div>
             </div>
             <button onclick="calculateBMI()" data-i18n="btn">✨ Calculate BMI</button>
             <div class="result" id="result"><p id="bmiResult"></p></div>
@@ -75,20 +66,13 @@
     </div>
     <script>
         var translations = {
-            en: { back:'← Back to Home', title:'BMI Calculator', subtitle:'BMI + tips + calories', weight:'Weight (kg)', height:'Height (cm)', age:'Age', gender:'Gender', male:'Male', female:'Female', btn:'✨ Calculate BMI', aboutTitle:'About BMI Calculator', aboutText:'Calculate your BMI, get health tips and daily calorie needs.', underweight:'Underweight', normal:'Normal', overweight:'Overweight', obese:'Obese', yourBMI:'Your BMI:', category:'Category:', idealWeight:'Ideal Weight:', dailyCalories:'Daily Calories:', tip:'💡 Tip:', tipUnder:'You are underweight. Try eating more protein and healthy fats.', tipNormal:'Perfect! Maintain your healthy lifestyle.', tipOver:'You are overweight. Try regular exercise and balanced diet.', tipObese:'You are obese. Consult a doctor for a personalized plan.', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter valid values' },
-            ar: { back:'← العودة للرئيسية', title:'حاسبة الوزن المثالي', subtitle:'BMI + نصائح + سعرات', weight:'الوزن (كجم)', height:'الطول (سم)', age:'العمر', gender:'الجنس', male:'ذكر', female:'أنثى', btn:'✨ احسب BMI', aboutTitle:'عن الحاسبة', aboutText:'احسب مؤشر كتلة الجسم واحصل على نصائح صحية وسعراتك اليومية.', underweight:'نقص وزن', normal:'طبيعي', overweight:'زيادة وزن', obese:'سمنة', yourBMI:'مؤشرك:', category:'التصنيف:', idealWeight:'الوزن المثالي:', dailyCalories:'السعرات اليومية:', tip:'💡 نصيحة:', tipUnder:'وزنك منخفض. حاول تناول المزيد من البروتين والدهون الصحية.', tipNormal:'ممتاز! حافظ على نمط حياتك الصحي.', tipOver:'وزنك زائد. جرب ممارسة الرياضة ونظام غذائي متوازن.', tipObese:'لديك سمنة. استشر طبيباً لوضع خطة مناسبة.', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال قيم صحيحة' },
-            fr: { back:'← Retour', title:'Calculatrice IMC', subtitle:'IMC + conseils + calories', weight:'Poids (kg)', height:'Taille (cm)', age:'Âge', gender:'Genre', male:'Homme', female:'Femme', btn:'✨ Calculer IMC', aboutTitle:'À propos', aboutText:'Calculez votre IMC et obtenez des conseils santé.', underweight:'Insuffisance', normal:'Normal', overweight:'Surpoids', obese:'Obésité', yourBMI:'Votre IMC:', category:'Catégorie:', idealWeight:'Poids idéal:', dailyCalories:'Calories/jour:', tip:'💡 Conseil:', tipUnder:'Poids faible. Mangez plus de protéines.', tipNormal:'Parfait! Continuez.', tipOver:'Surpoids. Faites du sport.', tipObese:'Obésité. Consultez un médecin.', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez des valeurs valides' },
-            tr: { back:'← Geri', title:'BMI Hesaplama', subtitle:'BMI + tavsiyeler', weight:'Kilo (kg)', height:'Boy (cm)', age:'Yaş', gender:'Cinsiyet', male:'Erkek', female:'Kadın', btn:'✨ Hesapla', aboutTitle:'Hakkında', aboutText:'BMI hesaplayın ve sağlık tavsiyeleri alın.', underweight:'Zayıf', normal:'Normal', overweight:'Fazla kilolu', obese:'Obez', yourBMI:'BMI:', category:'Kategori:', idealWeight:'İdeal Kilo:', dailyCalories:'Günlük Kalori:', tip:'💡 Tavsiye:', tipUnder:'Zayıfsınız. Daha fazla protein alın.', tipNormal:'Mükemmel! Devam edin.', tipOver:'Fazla kilolu. Spor yapın.', tipObese:'Obezsiniz. Doktora danışın.', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli değerler girin' }
+            en: { back:'← Back to Home', title:'BMI Calculator', subtitle:'BMI + tips + calories', weight:'Weight (kg)', height:'Height (cm)', age:'Age', gender:'Gender', male:'Male', female:'Female', btn:'✨ Calculate BMI', aboutTitle:'About BMI Calculator', aboutText:'Calculate your BMI, get health tips and daily calorie needs.', underweight:'Underweight', normal:'Normal', overweight:'Overweight', obese:'Obese', yourBMI:'Your BMI:', category:'Category:', idealWeight:'Ideal Weight:', dailyCalories:'Daily Calories:', tip:'💡 Tip:', tipUnder:'You are underweight. Try eating more protein.', tipNormal:'Perfect! Maintain your lifestyle.', tipOver:'You are overweight. Try exercise.', tipObese:'Consult a doctor.', footer:'© 2026 My Digital Tools', privacy:'Privacy', contact:'Contact', error:'⚠️ Please enter valid values' },
+            ar: { back:'← العودة للرئيسية', title:'حاسبة الوزن المثالي', subtitle:'BMI + نصائح + سعرات', weight:'الوزن (كجم)', height:'الطول (سم)', age:'العمر', gender:'الجنس', male:'ذكر', female:'أنثى', btn:'✨ احسب BMI', aboutTitle:'عن الحاسبة', aboutText:'احسب مؤشر كتلة الجسم واحصل على نصائح صحية.', underweight:'نقص وزن', normal:'طبيعي', overweight:'زيادة وزن', obese:'سمنة', yourBMI:'مؤشرك:', category:'التصنيف:', idealWeight:'الوزن المثالي:', dailyCalories:'السعرات اليومية:', tip:'💡 نصيحة:', tipUnder:'وزنك منخفض. حاول تناول المزيد من البروتين.', tipNormal:'ممتاز! حافظ على نمط حياتك.', tipOver:'وزنك زائد. جرب الرياضة.', tipObese:'استشر طبيباً.', footer:'© 2026 أدواتي الرقمية', privacy:'الخصوصية', contact:'اتصل بنا', error:'⚠️ الرجاء إدخال قيم صحيحة' },
+            fr: { back:'← Retour', title:'Calculatrice IMC', subtitle:'IMC + conseils', weight:'Poids (kg)', height:'Taille (cm)', age:'Âge', gender:'Genre', male:'Homme', female:'Femme', btn:'✨ Calculer IMC', aboutTitle:'À propos', aboutText:'Calculez votre IMC et obtenez des conseils.', underweight:'Insuffisance', normal:'Normal', overweight:'Surpoids', obese:'Obésité', yourBMI:'Votre IMC:', category:'Catégorie:', idealWeight:'Poids idéal:', dailyCalories:'Calories/jour:', tip:'💡 Conseil:', tipUnder:'Poids faible.', tipNormal:'Parfait!', tipOver:'Surpoids.', tipObese:'Consultez un médecin.', footer:'© 2026 Mes Outils', privacy:'Confidentialité', contact:'Contact', error:'⚠️ Entrez des valeurs valides' },
+            tr: { back:'← Geri', title:'BMI Hesaplama', subtitle:'BMI + tavsiyeler', weight:'Kilo (kg)', height:'Boy (cm)', age:'Yaş', gender:'Cinsiyet', male:'Erkek', female:'Kadın', btn:'✨ Hesapla', aboutTitle:'Hakkında', aboutText:'BMI hesaplayın ve tavsiyeler alın.', underweight:'Zayıf', normal:'Normal', overweight:'Fazla kilolu', obese:'Obez', yourBMI:'BMI:', category:'Kategori:', idealWeight:'İdeal Kilo:', dailyCalories:'Günlük Kalori:', tip:'💡 Tavsiye:', tipUnder:'Zayıfsınız.', tipNormal:'Mükemmel!', tipOver:'Fazla kilolu.', tipObese:'Doktora danışın.', footer:'© 2026 Dijital Araçlar', privacy:'Gizlilik', contact:'İletişim', error:'⚠️ Geçerli değerler girin' }
         };
         var currentLang = localStorage.getItem('lang') || 'en';
-        function applyLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(function(el) {
-                var key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
-            });
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-        }
+        function applyLang(lang) { currentLang = lang; document.querySelectorAll('[data-i18n]').forEach(function(el) { var key = el.getAttribute('data-i18n'); if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key]; }); document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr'; }
         function calculateBMI() {
             var w = document.getElementById('weight').value.trim();
             var h = document.getElementById('height').value.trim();
